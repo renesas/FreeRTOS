@@ -2266,6 +2266,9 @@
                     <name>$PROJ_DIR$\..\Common\Minimal\TaskNotify.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\Common\Minimal\TaskNotifyArray.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\Common\Minimal\TimerDemo.c</name>
                 </file>
             </group>
@@ -2779,6 +2782,9 @@
             <group>
                 <name>r_bsp_patch</name>
                 <file>
+                    <name>$PROJ_DIR$\src\smc_workaround\r_bsp_patch\lowlvl.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\src\smc_workaround\r_bsp_patch\platform.h</name>
                 </file>
             </group>
@@ -2814,6 +2820,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\src\smc_workaround\smc_workaround.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\smc_workaround\u_sci_rx_ext.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\smc_workaround\u_sci_rx_ext_if.h</name>
             </file>
         </group>
     </group>
