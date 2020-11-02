@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.3.0
+ * FreeRTOS Kernel V10.4.1
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,7 +36,7 @@
 /* Renesas includes. */
 #include "platform.h"
 #include "r_dtc_rx_if.h"
-#include "r_sci_rx_if.h"
+#include "u_sci_rx_ext_if.h"
 #include "r_byteq_if.h"
 
 /* Eval board specific definitions. */
@@ -67,24 +67,27 @@ sci_cb_args_t *pxArgs = (sci_cb_args_t *)pvArgs;
     {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
-        configASSERT( xRxQueue );
+        /* Ensure the queue is ready to be received by the application. */
+        if( xRxQueue != NULL )
+        {
+            /* Characters received from the UART are stored in this queue, ready to be
+            received by the application.  ***NOTE*** Using a queue in this way is very
+            convenient, but also very inefficient.  It can be used here because
+            characters will only arrive slowly.  In a higher bandwidth system a circular
+            RAM buffer or DMA should be used in place of this queue. */
+            xQueueSendFromISR( xRxQueue, &pxArgs->byte, &xHigherPriorityTaskWoken );
 
-        /* Characters received from the UART are stored in this queue, ready to be
-        received by the application.  ***NOTE*** Using a queue in this way is very
-        convenient, but also very inefficient.  It can be used here because
-        characters will only arrive slowly.  In a higher bandwidth system a circular
-        RAM buffer or DMA should be used in place of this queue. */
-        xQueueSendFromISR( xRxQueue, &pxArgs->byte, &xHigherPriorityTaskWoken );
-
-        /* See http://www.freertos.org/xQueueOverwriteFromISR.html for information
-        on the semantics of this ISR. */
-        portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+            /* See http://www.freertos.org/xQueueOverwriteFromISR.html for information
+            on the semantics of this ISR. */
+            portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+        }
     }
     /* Renesas API notifies the completion of transmission by SCI_EVT_TEI event. */
     else if( SCI_EVT_TEI == pxArgs->event )
     {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
+        /* Ensure the task is waiting for the notofication. */
         if( xSendingTask != NULL )
         {
             /* A task is waiting for the end of the Tx, unblock it now.
@@ -115,8 +118,7 @@ xComPortHandle xSerialPortInitMinimal( unsigned long ulWantedBaud, unsigned port
     /* Set interrupt priority. (Other UART settings had been initialized in the
     src/smc_gen/general/r_cg_hardware_setup.c.) */
     uint8_t ucInterruptPriority = configMAX_SYSCALL_INTERRUPT_PRIORITY - 1;
-    R_SCI_Control( xSerialSciHandle, SCI_CMD_SET_RXI_PRIORITY, ( void * ) &ucInterruptPriority );
-    R_SCI_Control( xSerialSciHandle, SCI_CMD_SET_TXI_PRIORITY, ( void * ) &ucInterruptPriority );
+    U_SCI_Control_EXT( xSerialSciHandle, SCI_CMD_SET_INT_PRIORITY, ( void * ) &ucInterruptPriority );
 
     /* Only one UART is supported, so it doesn't matter what is returned
     here. */

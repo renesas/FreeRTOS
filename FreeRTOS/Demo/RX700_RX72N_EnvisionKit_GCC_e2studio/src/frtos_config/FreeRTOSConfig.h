@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.3.0
+ * FreeRTOS Kernel V10.4.1
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -46,8 +46,8 @@
 #define configCPU_CLOCK_HZ				(BSP_ICLK_HZ)
 #define configPERIPHERAL_CLOCK_HZ		(BSP_PCLKB_HZ)
 #define configTICK_RATE_HZ				(( TickType_t ) 1000)
-#define configMINIMAL_STACK_SIZE		(( unsigned short ) 170)
-#define configTOTAL_HEAP_SIZE_N			(60)
+#define configMINIMAL_STACK_SIZE		(( unsigned short ) 130)
+#define configTOTAL_HEAP_SIZE_N			(46)
 #define configTOTAL_HEAP_SIZE			(( size_t ) ( configTOTAL_HEAP_SIZE_N * 1024 ))
 #define configMAX_TASK_NAME_LEN			(12)
 #define configUSE_TRACE_FACILITY		1
@@ -66,6 +66,7 @@
 #define configMAX_PRIORITIES			(7)
 #define configMAX_CO_ROUTINE_PRIORITIES (2)
 #define configUSE_TASK_NOTIFICATIONS     1
+#define configTASK_NOTIFICATION_ARRAY_ENTRIES   3
 #define configRECORD_STACK_HIGH_ADDRESS  0
 #define configNUM_THREAD_LOCAL_STORAGE_POINTERS 0
 
@@ -122,7 +123,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelete					1
 #define INCLUDE_vTaskCleanUpResources		0
 #define INCLUDE_vTaskSuspend				1
-#define INCLUDE_vTaskDelayUntil				1
+#define INCLUDE_xTaskDelayUntil				1
 #define INCLUDE_vTaskDelay					1
 #define INCLUDE_uxTaskGetStackHighWaterMark	1
 #define INCLUDE_xTaskGetSchedulerState		1
@@ -144,7 +145,18 @@ required to ensure flase positive timing errors are not reported. */
 #define bktSECONDARY_PRIORITY	(( configMAX_PRIORITIES - 4 ))
 #define intqHIGHER_PRIORITY		(( configMAX_PRIORITIES - 3 ))
 
-/* When the FIT configurator or the Smart Configurator is used, platform.h has to be used. */
+/* Override some of the stack sizes set in the common demo tasks.  Almost these
+tasks are created using configMINIMAL_STACK_SIZE (in this FreeRTOSConfig.h, it is
+130) for the stack size setting as default but some of then need more stack. */
+#define ebEVENT_GROUP_SET_BITS_TEST_TASK_STACK_SIZE		(( unsigned short ) 150)
+
+/* If configINCLUDE_PLATFORM_H_INSTEAD_OF_IODEFINE_H is set to 0 then iodefine.h
+is included and used in FreeRTOS Kernel's Renesas RX port.  If the macro is set
+to 1 then platform.h is included and used in the port.  If the macro is set to 2
+then neither iodefine.h nor platform.h are included.  If the macro is undefined,
+it is set to 0 (CC-RX/GNURX) or 2 (ICCRX) internally for backward compatibility.
+When the FIT configurator or the Smart Configurator is used, platform.h has to be
+used. */
 #define configINCLUDE_PLATFORM_H_INSTEAD_OF_IODEFINE_H  1
 
 #endif /* FREERTOS_CONFIG_H */

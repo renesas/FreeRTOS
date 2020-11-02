@@ -270,6 +270,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>__RX</state>
+                    <state>ideDISABLE_DEBUG_CONSOLE</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -345,7 +346,7 @@
                     <state>$PROJ_DIR$\src\smc_workaround</state>
                     <state>$PROJ_DIR$\src\smc_workaround\r_bsp_patch</state>
                     <state>$PROJ_DIR$\..\..\Source\include</state>
-                    <state>$PROJ_DIR$\..\..\Source\portable\IAR\RX700v3_DPFPU</state>
+                    <state>$PROJ_DIR$\..\..\Source\portable\IAR\RX</state>
                     <state>$PROJ_DIR$\src\frtos_startup</state>
                     <state>$PROJ_DIR$\src\frtos_config</state>
                     <state>$PROJ_DIR$\src\frtos_skeleton</state>
@@ -2177,10 +2178,10 @@
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\Source\portable\IAR\RX700v3_DPFPU\port.c</name>
+                <name>$PROJ_DIR$\..\..\Source\portable\IAR\RX\port.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\Source\portable\IAR\RX700v3_DPFPU\portmacro.h</name>
+                <name>$PROJ_DIR$\..\..\Source\portable\IAR\RX\portmacro.h</name>
             </file>
         </group>
         <file>
@@ -2264,6 +2265,9 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Common\Minimal\TaskNotify.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Common\Minimal\TaskNotifyArray.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Common\Minimal\TimerDemo.c</name>
@@ -2381,13 +2385,13 @@
                     <group>
                         <name>en</name>
                         <file>
-                            <name>$PROJ_DIR$\src\smc_gen\r_bsp\doc\en\r01an1685ej0552-rx-bsp.pdf</name>
+                            <name>$PROJ_DIR$\src\smc_gen\r_bsp\doc\en\r01an1685ej0561-rx-bsp.pdf</name>
                         </file>
                     </group>
                     <group>
                         <name>ja</name>
                         <file>
-                            <name>$PROJ_DIR$\src\smc_gen\r_bsp\doc\ja\r01an1685jj0552-rx-bsp.pdf</name>
+                            <name>$PROJ_DIR$\src\smc_gen\r_bsp\doc\ja\r01an1685jj0561-rx-bsp.pdf</name>
                         </file>
                     </group>
                 </group>
@@ -2779,6 +2783,9 @@
             <group>
                 <name>r_bsp_patch</name>
                 <file>
+                    <name>$PROJ_DIR$\src\smc_workaround\r_bsp_patch\lowlvl.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\src\smc_workaround\r_bsp_patch\platform.h</name>
                 </file>
             </group>
@@ -2814,6 +2821,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\src\smc_workaround\smc_workaround.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\smc_workaround\u_sci_rx_ext.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\smc_workaround\u_sci_rx_ext_if.h</name>
             </file>
         </group>
     </group>
