@@ -3,7 +3,7 @@
 
 /* Set mainCREATE_SIMPLE_BLINKY_DEMO_ONLY to one to run the simple blinky demo,
 or 0 to run the more comprehensive test and demo application. */
-#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY	0
+#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY	1
 
 /* The following demo_main() is placed in the src/frtos_startup/freertos_start.c
 and it calls main_blinky() or main_full() according to the macro setting. */

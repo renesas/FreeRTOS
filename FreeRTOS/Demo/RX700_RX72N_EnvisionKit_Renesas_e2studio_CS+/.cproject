@@ -31,7 +31,7 @@
                 				
                 <option id="toolchain.version" value="v3.02.00"/>
                 				
-                <option id="toolchain.enable" value="true"/>
+                <option id="toolchain.enable" value="false"/>
                 			
             </storageModule>
             			
@@ -91,7 +91,7 @@
                                 								
                                 <option id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.fpu.313591590" name="Use floating point arithmetic instructions (-fpu/-nofpu)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.fpu" useByScannerDiscovery="false" value="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.fpu.yes" valueType="enumerated"/>
                                 								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.include.1661177989" name="Include file directories (-include)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.include" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.include.1661177989" name="Include file directories (-include)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.include" useByScannerDiscovery="false" valueType="includePath">
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${TCINSTALL}/include&quot;"/>
                                     									
@@ -107,8 +107,6 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_workaround}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_workaround/r_bsp_patch}&quot;"/>
-                                    									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/FreeRTOS/Source/include}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/FreeRTOS/Source/portable/Renesas/RX}&quot;"/>
@@ -116,6 +114,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/frtos_startup}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/frtos_config}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_bsp}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_config}&quot;"/>
                                     									
@@ -134,8 +134,6 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_dtc_rx}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_dtc_rx/src}&quot;"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_bsp}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/general}&quot;"/>
                                     									
@@ -175,11 +173,7 @@
                                 								
                                 <option id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.showExpansions.1459600172" name="Outputs the assembler macro expansion statements (-show=expansions)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.showExpansions"/>
                                 								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.preInclude.46899140" name="Pre-include files (-preinclude)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.preInclude" useByScannerDiscovery="false" valueType="stringList">
-                                    									
-                                    <listOptionValue builtIn="false" value="../src/smc_workaround/CC_patch.h"/>
-                                    								
-                                </option>
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.preInclude.46899140" name="Pre-include files (-preinclude)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.preInclude" useByScannerDiscovery="false" valueType="stringList"/>
                                 								
                                 <option id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.optimize.409389933" name="Optimization level (-optimize)" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.optimize" useByScannerDiscovery="false" value="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.option.optimize.levelMax" valueType="enumerated"/>
                                 								
@@ -331,9 +325,15 @@
                         					
                     </folderInfo>
                     					
+                    <fileInfo id="com.renesas.cdt.managedbuild.renesas.ccrx.hardwaredebug.configuration.1655135959.1926858692" name="resetprg.c" rcbsApplicability="disable" resourcePath="src/smc_gen/r_bsp/mcu/all/resetprg.c" toolsToInvoke="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1299251019.1762701549">
+                        						
+                        <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1299251019.1762701549" name="Compiler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1299251019"/>
+                        					
+                    </fileInfo>
+                    					
                     <sourceEntries>
                         						
-                        <entry excluding="smc_gen/r_dtc_rx/src/r_dtc_rx.c|smc_gen/r_dtc_rx/src/targets/rx72n/r_dtc_rx_target.c|smc_gen/r_bsp/mcu/all/resetprg.c|smc_gen/r_bsp/mcu/all/r_rx_intrinsic_functions.c|smc_gen/r_pincfg/Pin.h|smc_gen/r_pincfg/Pin.c|FreeRTOS/Source/portable/MemMang/heap_5.c|FreeRTOS/Source/portable/MemMang/heap_3.c|FreeRTOS/Source/portable/MemMang/heap_2.c|FreeRTOS/Source/portable/MemMang/heap_1.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+                        <entry excluding="smc_gen/r_pincfg/Pin.h|smc_gen/r_pincfg/Pin.c|FreeRTOS/Source/portable/MemMang/heap_5.c|FreeRTOS/Source/portable/MemMang/heap_3.c|FreeRTOS/Source/portable/MemMang/heap_2.c|FreeRTOS/Source/portable/MemMang/heap_1.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
                         					
                     </sourceEntries>
                     				
@@ -342,6 +342,8 @@
             </storageModule>
             			
             <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            			
+            <storageModule moduleId="com.renesas.cdt.managedbuild.core.boardInfo"/>
             		
         </cconfiguration>
         	

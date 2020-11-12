@@ -1,11 +1,6 @@
 #ifndef SMC_WORKAROUND_H
 #define SMC_WORKAROUND_H
 
-#include "CC_patch.h"
-#include "IDE_patch.h"
-#include "CG_patch.h"
-#include "FIT_patch.h"
-
 #if defined(__GNUC__)
 
 /* Just for convenience.
