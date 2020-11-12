@@ -118,7 +118,8 @@ xComPortHandle xSerialPortInitMinimal( unsigned long ulWantedBaud, unsigned port
     /* Set interrupt priority. (Other UART settings had been initialized in the
     src/smc_gen/general/r_cg_hardware_setup.c.) */
     uint8_t ucInterruptPriority = configMAX_SYSCALL_INTERRUPT_PRIORITY - 1;
-    U_SCI_Control_EXT( xSerialSciHandle, SCI_CMD_SET_INT_PRIORITY, ( void * ) &ucInterruptPriority );
+//    U_SCI_Control_EXT( xSerialSciHandle, SCI_CMD_SET_INT_PRIORITY, ( void * ) &ucInterruptPriority );
+    R_SCI_Control( xSerialSciHandle, SCI_CMD_SET_INT_PRIORITY, ( void * ) &ucInterruptPriority );
 
     /* Only one UART is supported, so it doesn't matter what is returned
     here. */
