@@ -62,9 +62,6 @@
 #ifndef R_BSP_CONFIG_REF_HEADER_FILE
 #define R_BSP_CONFIG_REF_HEADER_FILE
 
-/* Include for various workarounds. */
-#include "smc_workaround.h"
-
 /***********************************************************************************************************************
 Configuration Options
 ***********************************************************************************************************************/

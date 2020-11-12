@@ -33,6 +33,7 @@
 /******************************************************************************
 Includes   <System Includes> , "Project Includes"
 ******************************************************************************/
+#include <string.h>
 #include "platform.h"
 #include "freertos_start.h"
 #include "demo_main.h"
@@ -552,6 +553,180 @@ void vSendString( const char * const pcString )
     #endif
 }
 /*-----------------------------------------------------------*/
+
+void *malloc( size_t xWantedSize )
+{
+#if BSP_CFG_RTOS_USED == 1
+    /* FreeRTOS */
+
+    return pvPortMalloc( xWantedSize );
+#else
+    /* SEGGER embOS */
+    /* Micrium MicroC/OS */
+    /* Renesas RI600V4 & RI600PX */
+
+    #error "Unsupported RTOS is selected."
+#endif
+}
+
+/* Replacement to be thread-safe (in case of other than using heap_3.c). */
+void free( void *pv )
+{
+#if BSP_CFG_RTOS_USED == 1
+    /* FreeRTOS */
+
+    vPortFree( pv );
+#else
+    /* SEGGER embOS */
+    /* Micrium MicroC/OS */
+    /* Renesas RI600V4 & RI600PX */
+
+    #error "Unsupported RTOS is selected."
+#endif
+}
+
+#if defined(__GNUC__)
+
+/* Just for convenience.
+ */
+#define brk()               R_BSP_BRK()
+#define int_exception(x)    R_BSP_INT(x)
+#define wait()              R_BSP_WAIT()
+#define nop()               R_BSP_NOP()
+
+#endif /* defined(__GNUC__) */
+
+#if defined(__GNUC__) || defined(__ICCRX__)
+
+/* Just for convenience.
+ */
+#define setpsw_i()  R_BSP_SETPSW_I()
+#define clrpsw_i()  R_BSP_CLRPSW_I()
+
+#endif /* defined(__GNUC__) || defined(__ICCRX__) */
+
+#if defined(__CDT_PARSER__)
+
+#if defined(__CCRX__)
+
+/* Workaround for missing pre-defined macro in the Renesas Toolchain Builtin
+ * Language Settings. The following definition is demo specific.
+ */
+#ifdef __RXV3
+#ifndef __TFU
+#define __TFU 1
+#endif
+#endif
+
+/* Workaround for wrong pre-defined macro in the Renesas Toolchain Builtin
+ * Language Settings. The following definition is demo specific.
+ */
+#ifdef __RXV3
+#ifdef __DBL4
+#undef __DBL4
+#endif
+#ifndef __DBL8
+#define __DBL8 1
+#endif
+#else
+#ifndef __DBL4
+#define __DBL4 1
+#endif
+#ifdef __DBL8
+#undef __DBL8
+#endif
+#endif
+
+#endif /* defined(__CCRX__) */
+
+#if defined(__GNUC__) || defined(__ICCRX__)
+
+/* Workaround to reduce errors/warnings caused by e2 studio CDT's INDEXER and CODAN.
+ */
+#ifndef __asm
+#define __asm asm
+#endif
+#ifndef __attribute__
+#define __attribute__(...)
+#endif
+
+#endif /* defined(__GNUC__) || defined(__ICCRX__) */
+
+#endif /* defined(__CDT_PARSER__) */
+
+#if defined(__CCRX__)
+
+/* This file has to be included by using CC-RX's -preinclude option. */
+
+/* Workaround for warning messages caused by undefined preprocessing identifier.
+ */
+#ifndef _FEVAL
+#define _FEVAL 0
+#endif
+#ifndef _FEVVAL
+#define _FEVVAL 0
+#endif
+#ifndef _HAS_C9X_FAST_FMA
+#define _HAS_C9X_FAST_FMA 0
+#endif
+
+#endif /* defined(__CCRX__) */
+
+#if defined(__ICCRX__)
+
+/* Workaround to reduce the following remark messages caused in the r_rx_compiler.h.
+ *
+ *   #define R_BSP_ASM(...)            _R_BSP_ASM(__VA_ARGS__\n)
+ *                                                           ^
+ * "XXX\r_rx_compiler.h",NNN  Remark[Pe007]: unrecognized token
+ *
+ * Turn on the remark messages here.
+ */
+#pragma diag_default = Pe007
+
+/* Workaround to reduce the following remark messages. (The following is example.)
+ *
+ *   #define R_BSP_ASM(...)            _R_BSP_ASM(__VA_ARGS__\n)
+ *                                                           ^
+ * "XXX\r_rx_compiler.h",NNN  Remark[Pe007]: unrecognized token
+ *
+ *       R_BSP_ASM(    SUB     #01H, R1                  )
+ *                             ^
+ * "XXX\r_bsp_common.c",NNN  Remark[Pe010]: "#" not expected here
+ *
+ *       R_BSP_ASM_BEGIN
+ *       ^
+ * "XXX\r_bsp_common.c",NNN  Remark[Pa174]: inline assembler statement has no declared
+ * side-effect. All optimizations around it will be disabled. Either add side-effect
+ * declarations or add volatile.
+ *
+ * Now redefine the following macros.
+ */
+#if !defined(__CDT_PARSER__)
+
+#undef _R_BSP_ASM
+#undef R_BSP_ASM
+/* #undef R_BSP_ASM_LAB_NEXT */ /* no change */
+/* #undef R_BSP_ASM_LAB_PREV */ /* no change */
+/* #undef R_BSP_ASM_LAB */ /* no change */
+#undef R_BSP_ASM_BEGIN
+#undef R_BSP_ASM_END
+
+#define _R_BSP_ASM(...)           #__VA_ARGS__ "\n"
+#define R_BSP_ASM(...)            _R_BSP_ASM(__VA_ARGS__)
+/* #define R_BSP_ASM_LAB_NEXT(n)     _lab##n */ /* no change */
+/* #define R_BSP_ASM_LAB_PREV(n)     _lab##n */ /* no change */
+/* #define R_BSP_ASM_LAB(n_colon)    R_BSP_ASM(_lab##n_colon) */ /* no change */
+#define R_BSP_ASM_BEGIN           R_BSP_PRAGMA(diag_suppress = Pa174)\
+                                  R_BSP_PRAGMA(diag_suppress = Pe010)\
+                                  __asm volatile(
+#define R_BSP_ASM_END             );\
+                                  R_BSP_PRAGMA(diag_default = Pe010)\
+                                  R_BSP_PRAGMA(diag_default = Pa174)
+
+#endif /* !defined(__CDT_PARSER__) */
+
+#endif /* defined(__ICCRX__) */
 
 #endif /* (BSP_CFG_RTOS_USED == 1) */
 

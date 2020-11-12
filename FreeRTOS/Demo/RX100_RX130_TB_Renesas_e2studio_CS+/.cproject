@@ -105,10 +105,6 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/FreeRTOS_Demo}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_workaround}&quot;"/>
-                                    									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/FreeRTOS/Source/include}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/FreeRTOS/Source/portable/Renesas/RX}&quot;"/>
@@ -327,17 +323,31 @@
                         					
                     </folderInfo>
                     					
+                    <fileInfo id="com.renesas.cdt.managedbuild.renesas.ccrx.hardwaredebug.configuration.1655135959.443841912" name="Pin.h" rcbsApplicability="disable" resourcePath="src/smc_gen/r_pincfg/Pin.h" toolsToInvoke=""/>
+                    					
                     <folderInfo id="com.renesas.cdt.managedbuild.renesas.ccrx.hardwaredebug.configuration.1655135959.437330228" name="/" resourcePath="src/smc_gen/r_dtc_rx/src">
                         						
                         <toolChain id="com.renesas.cdt.managedbuild.renesas.ccrx.hardwaredebug.toolChain.204061744" name="Renesas CCRX Toolchain" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.hardwaredebug.toolChain" unusedChildren="">
+                            							
+                            <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.PE" id="com.renesas.cdt.managedbuild.renesas.ccrx.base.targetPlatform" osList="win32" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.targetPlatform"/>
                             							
                             <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.dsp.1057251973" name="DSP Assembler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.dsp.2065992398"/>
                             							
                             <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.common.51655480" name="Common" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.common.1005182378"/>
                             							
-                            <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1069742386" name="Compiler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1299251019"/>
+                            <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1069742386" name="Compiler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.compiler.1299251019">
+                                								
+                                <inputType id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.gcc.inputType.142959410" name="Compiler Input C" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.gcc.inputType"/>
+                                								
+                                <inputType id="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.gpp.inputType.650133756" name="Compiler Input CPP" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.compiler.gpp.inputType"/>
+                                							
+                            </tool>
                             							
-                            <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.assembler.922527490" name="Assembler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.assembler.573673281"/>
+                            <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.assembler.922527490" name="Assembler" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.assembler.573673281">
+                                								
+                                <inputType id="com.renesas.cdt.managedbuild.renesas.ccrx.assembler.inputType.1074482179" name="Assembler InputType" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.assembler.inputType"/>
+                                							
+                            </tool>
                             							
                             <tool id="com.renesas.cdt.managedbuild.renesas.ccrx.base.linker.505038908" name="Linker" superClass="com.renesas.cdt.managedbuild.renesas.ccrx.base.linker.1857970197"/>
                             							
@@ -353,7 +363,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="smc_gen/r_pincfg/Pin.h|smc_gen/r_pincfg/Pin.c|FreeRTOS/Source/portable/MemMang/heap_5.c|FreeRTOS/Source/portable/MemMang/heap_3.c|FreeRTOS/Source/portable/MemMang/heap_2.c|FreeRTOS/Source/portable/MemMang/heap_1.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+                        <entry excluding="FreeRTOS/Source/portable/MemMang/heap_2.c|FreeRTOS/Source/portable/MemMang/heap_3.c|smc_workaround|FreeRTOS/Source/portable/MemMang/heap_5.c|FreeRTOS/Source/portable/MemMang/heap_1.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
                         					
                     </sourceEntries>
                     				

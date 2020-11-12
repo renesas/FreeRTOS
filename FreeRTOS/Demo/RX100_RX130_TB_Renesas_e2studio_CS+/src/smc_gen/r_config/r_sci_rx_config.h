@@ -50,6 +50,8 @@
 Configuration Options
 ***********************************************************************************************************************/
 
+#define SCI_CMD_SET_INT_PRIORITY ((sci_cmd_t)(-1))
+
 /* SPECIFY WHETHER TO INCLUDE CODE FOR API PARAMETER CHECKING */
 /* Setting to BSP_CFG_PARAM_CHECKING_ENABLE utilizes the system default setting */
 /* Setting to 1 includes parameter checking; 0 compiles out parameter checking */

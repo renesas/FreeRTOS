@@ -36,7 +36,7 @@
 /* Renesas includes. */
 #include "platform.h"
 #include "r_dtc_rx_if.h"
-#include "u_sci_rx_ext_if.h"
+//#include "u_sci_rx_ext_if.h"
 #include "r_byteq_if.h"
 
 /* Eval board specific definitions. */
