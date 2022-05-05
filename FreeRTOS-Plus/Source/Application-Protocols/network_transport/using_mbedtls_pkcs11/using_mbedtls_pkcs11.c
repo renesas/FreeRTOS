@@ -51,7 +51,11 @@
 #include "pkcs11.h"
 #include "core_pki_utils.h"
 
-#include "mbedtls_config.h"
+#if !defined(MBEDTLS_CONFIG_FILE)
+#include "config.h"
+#else
+#include MBEDTLS_CONFIG_FILE
+#endif
 
 /*-----------------------------------------------------------*/
 
