@@ -25,7 +25,7 @@
  */
 
 /**
- * @file tls_freertos_pkcs11.h
+ * @file using_mbedtls_pkcs11.h
  * @brief TLS transport interface header.
  * @note This file is derived from the tls_freertos.h header file found in the mqtt
  * section of IoT Libraries source code. The file has been modified to support using
@@ -63,18 +63,12 @@
 extern void vLoggingPrintf( const char * pcFormatString,
                             ... );
 
-/* Map the SdkLog macro to the logging function to enable logging
- * on Windows simulator. */
-#ifndef SdkLog
-    #define SdkLog( message )    vLoggingPrintf message
-#endif
-
 #include "logging_stack.h"
 
 /************ End of logging configuration ****************/
 
 /* FreeRTOS+TCP include. */
-#include "FreeRTOS_Sockets.h"
+#include "sockets_wrapper.h"
 
 /* Transport interface include. */
 #include "transport_interface.h"
@@ -89,8 +83,19 @@ extern void vLoggingPrintf( const char * pcFormatString,
 #include "mbedtls/pk_internal.h"
 #include "mbedtls/error.h"
 
+/* Undefine the macro for Keil Compiler to avoid conflict: */
+/* __PASTE macro redefinition [-Wmacro-redefinition] */
+#if defined(__ARMCC_VERSION)
+ #pragma GCC diagnostic push
+ #pragma GCC diagnostic ignored "-Wmacro-redefined"
+#endif
+
 /* PKCS #11 includes. */
 #include "core_pkcs11.h"
+
+#if defined(__ARMCC_VERSION)
+ #pragma GCC diagnostic pop
+#endif
 
 /**
  * @brief Secured connection context.

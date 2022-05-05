@@ -53,6 +53,9 @@
     #define LIBRARY_LOG_LEVEL    LOG_INFO
 #endif
 
+extern void vLoggingPrintf( const char * pcFormatString,
+                            ... );
+
 #include "logging_stack.h"
 
 /************ End of logging configuration ****************/
@@ -78,7 +81,7 @@ typedef struct xSOCKET * Socket_t; /**< @brief Socket handle data type. */
  *
  * @param[out] pTcpSocket The output parameter to return the created socket descriptor.
  * @param[in] pHostName Server hostname to connect to.
- * @param[in] pServerInfo Server port to connect to.
+ * @param[in] port Server port to connect to.
  * @param[in] receiveTimeoutMs Timeout (in milliseconds) for transport receive.
  * @param[in] sendTimeoutMs Timeout (in milliseconds) for transport send.
  *
@@ -95,9 +98,9 @@ BaseType_t Sockets_Connect( Socket_t * pTcpSocket,
 /**
  * @brief End connection to server.
  *
- * @param[in] tcpSocket The socket descriptor.
+ * @param[in] xSocket The socket descriptor.
  */
-void Sockets_Disconnect( Socket_t tcpSocket );
+void Sockets_Disconnect( Socket_t xSocket );
 
 /**
  * @brief Transmit data to the remote socket.

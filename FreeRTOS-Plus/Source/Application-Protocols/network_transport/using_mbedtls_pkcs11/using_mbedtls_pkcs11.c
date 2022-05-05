@@ -25,7 +25,7 @@
  */
 
 /**
- * @file tls_freertos_pkcs11.c
+ * @file using_mbedtls_pkcs11.c
  * @brief TLS transport interface implementations. This implementation uses
  * mbedTLS.
  * @note This file is derived from the tls_freertos.c source file found in the mqtt
@@ -39,10 +39,6 @@
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
 
-/* FreeRTOS+TCP includes. */
-#include "FreeRTOS_IP.h"
-#include "FreeRTOS_Sockets.h"
-
 /* TLS transport header. */
 #include "using_mbedtls_pkcs11.h"
 
@@ -54,6 +50,8 @@
 #include "core_pkcs11.h"
 #include "pkcs11.h"
 #include "core_pki_utils.h"
+
+#include "mbedtls_config.h"
 
 /*-----------------------------------------------------------*/
 
@@ -148,7 +146,7 @@ static TlsTransportStatus_t initMbedtls( void );
  *
  * @return Zero on success.
  */
-static int32_t generateRandomBytes( void * pvCtx,
+static int generateRandomBytes( void * pvCtx,
                                     unsigned char * pucRandom,
                                     size_t xRandomLength );
 
@@ -202,15 +200,15 @@ int canDoStub( mbedtls_pk_type_t type );
  *
  * @return Zero on success.
  */
-static int32_t privateKeySigningCallback( void * pvContext,
+static int privateKeySigningCallback( void * pvContext,
                                           mbedtls_md_type_t xMdAlg,
                                           const unsigned char * pucHash,
                                           size_t xHashLen,
                                           unsigned char * pucSig,
                                           size_t * pxSigLen,
-                                          int32_t ( * piRng )( void *,
-                                                               unsigned char *,
-                                                               size_t ),
+                                          int ( *piRng )( void *,
+                                                              unsigned char *,
+                                                              size_t ),
                                           void * pvRng );
 
 
@@ -502,7 +500,7 @@ static TlsTransportStatus_t initMbedtls( void )
 
 /*-----------------------------------------------------------*/
 
-static int32_t generateRandomBytes( void * pvCtx,
+static int generateRandomBytes( void * pvCtx,
                                     unsigned char * pucRandom,
                                     size_t xRandomLength )
 {
@@ -517,7 +515,7 @@ static int32_t generateRandomBytes( void * pvCtx,
         LogError( ( "Failed to generate random bytes from the PKCS #11 module." ) );
     }
 
-    return xResult;
+    return (int) xResult;
 }
 
 /*-----------------------------------------------------------*/
@@ -530,12 +528,17 @@ static CK_RV readCertificateIntoContext( SSLContext_t * pSslContext,
     CK_RV xResult = CKR_OK;
     CK_ATTRIBUTE xTemplate = { 0 };
     CK_OBJECT_HANDLE xCertObj = 0;
+    size_t labelLength = strlen(pcLabelName);
+
+    if (labelLength > pkcs11configMAX_LABEL_LENGTH)
+    {
+        labelLength = pkcs11configMAX_LABEL_LENGTH;
+    }
 
     /* Get the handle of the certificate. */
     xResult = xFindObjectWithLabelAndClass( pSslContext->xP11Session,
-                                            pcLabelName,
-                                            strnlen( pcLabelName,
-                                                     pkcs11configMAX_LABEL_LENGTH ),
+                                            (char *)pcLabelName,
+                                            labelLength,
                                             xClass,
                                             &xCertObj );
 
@@ -579,7 +582,7 @@ static CK_RV readCertificateIntoContext( SSLContext_t * pSslContext,
     /* Decode the certificate. */
     if( CKR_OK == xResult )
     {
-        xResult = mbedtls_x509_crt_parse( pxCertificateContext,
+        xResult = (CK_RV) mbedtls_x509_crt_parse( pxCertificateContext,
                                           ( const unsigned char * ) xTemplate.pValue,
                                           xTemplate.ulValueLen );
     }
@@ -613,9 +616,9 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
     /* Get the PKCS #11 module/token slot count. */
     if( CKR_OK == xResult )
     {
-        xResult = ( BaseType_t ) pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
-                                                                          NULL,
-                                                                          &xCount );
+        xResult = pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
+                                                           NULL,
+                                                           &xCount );
     }
 
     /* Allocate memory to store the token slots. */
@@ -632,27 +635,33 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
     /* Get all of the available private key slot identities. */
     if( CKR_OK == xResult )
     {
-        xResult = ( BaseType_t ) pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
-                                                                          pxSlotIds,
-                                                                          &xCount );
+        xResult = pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
+                                                           pxSlotIds,
+                                                           &xCount );
     }
 
     /* Put the module in authenticated mode. */
     if( CKR_OK == xResult )
     {
-        xResult = ( BaseType_t ) pxCtx->pxP11FunctionList->C_Login( pxCtx->xP11Session,
-                                                                    CKU_USER,
-                                                                    ( CK_UTF8CHAR_PTR ) configPKCS11_DEFAULT_USER_PIN,
-                                                                    sizeof( configPKCS11_DEFAULT_USER_PIN ) - 1 );
+        xResult = pxCtx->pxP11FunctionList->C_Login( pxCtx->xP11Session,
+                                                     CKU_USER,
+                                                     ( CK_UTF8CHAR_PTR ) configPKCS11_DEFAULT_USER_PIN,
+                                                     sizeof( configPKCS11_DEFAULT_USER_PIN ) - 1 );
     }
 
     if( CKR_OK == xResult )
     {
+        size_t labelLength = strlen(pcLabelName);
+
+        if (labelLength > pkcs11configMAX_LABEL_LENGTH)
+        {
+            labelLength = pkcs11configMAX_LABEL_LENGTH;
+        }
+
         /* Get the handle of the device private key. */
         xResult = xFindObjectWithLabelAndClass( pxCtx->xP11Session,
-                                                pcLabelName,
-                                                strnlen( pcLabelName,
-                                                         pkcs11configMAX_LABEL_LENGTH ),
+                                                (char *)pcLabelName,
+                                                labelLength,
                                                 CKO_PRIVATE_KEY,
                                                 &pxCtx->xP11PrivateKey );
     }
@@ -731,15 +740,15 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
 
 /*-----------------------------------------------------------*/
 
-static int32_t privateKeySigningCallback( void * pvContext,
+static int privateKeySigningCallback( void * pvContext,
                                           mbedtls_md_type_t xMdAlg,
                                           const unsigned char * pucHash,
                                           size_t xHashLen,
                                           unsigned char * pucSig,
                                           size_t * pxSigLen,
-                                          int32_t ( * piRng )( void *,
-                                                               unsigned char *,
-                                                               size_t ),
+                                          int ( *piRng )( void *,
+                                                              unsigned char *,
+                                                              size_t ),
                                           void * pvRng )
 {
     CK_RV xResult = CKR_OK;
@@ -794,7 +803,7 @@ static int32_t privateKeySigningCallback( void * pvContext,
     if( CKR_OK == xResult )
     {
         *pxSigLen = sizeof( xToBeSigned );
-        xResult = pxTLSContext->pxP11FunctionList->C_Sign( ( CK_SESSION_HANDLE ) pxTLSContext->xP11Session,
+        xResult = pxTLSContext->pxP11FunctionList->C_Sign( pxTLSContext->xP11Session,
                                                            xToBeSigned,
                                                            xToBeSignedLen,
                                                            pucSig,
@@ -901,9 +910,10 @@ TlsTransportStatus_t TLS_FreeRTOS_Connect( NetworkContext_t * pNetworkContext,
     if( returnStatus != TLS_TRANSPORT_SUCCESS )
     {
         if( ( pNetworkContext != NULL ) &&
-            ( pTlsTransportParams->tcpSocket != FREERTOS_INVALID_SOCKET ) )
+            ( pTlsTransportParams != NULL ) &&
+            ( pTlsTransportParams->tcpSocket != SOCKETS_INVALID_SOCKET ) )
         {
-            ( void ) FreeRTOS_closesocket( pTlsTransportParams->tcpSocket );
+            ( void ) Sockets_Disconnect( pTlsTransportParams->tcpSocket );
         }
     }
     else
@@ -923,7 +933,7 @@ void TLS_FreeRTOS_Disconnect( NetworkContext_t * pNetworkContext )
     TlsTransportParams_t * pTlsTransportParams = NULL;
     BaseType_t tlsStatus = 0;
 
-    if( pNetworkContext != NULL && pNetworkContext->pParams != NULL )
+    if( ( pNetworkContext != NULL ) && ( pNetworkContext->pParams != NULL ) )
     {
         pTlsTransportParams = pNetworkContext->pParams;
         /* Attempting to terminate TLS connection. */
@@ -975,35 +985,52 @@ int32_t TLS_FreeRTOS_recv( NetworkContext_t * pNetworkContext,
     TlsTransportParams_t * pTlsTransportParams = NULL;
     int32_t tlsStatus = 0;
 
-    configASSERT( ( pNetworkContext != NULL ) && ( pNetworkContext->pParams != NULL ) );
-
-    pTlsTransportParams = pNetworkContext->pParams;
-    tlsStatus = ( int32_t ) mbedtls_ssl_read( &( pTlsTransportParams->sslContext.context ),
-                                              pBuffer,
-                                              bytesToRecv );
-
-    if( ( tlsStatus == MBEDTLS_ERR_SSL_TIMEOUT ) ||
-        ( tlsStatus == MBEDTLS_ERR_SSL_WANT_READ ) ||
-        ( tlsStatus == MBEDTLS_ERR_SSL_WANT_WRITE ) )
+    if( ( pNetworkContext == NULL ) || ( pNetworkContext->pParams == NULL ) )
     {
-        LogDebug( ( "Failed to read data. However, a read can be retried on this error. "
-                    "mbedTLSError= %s : %s.",
-                    mbedtlsHighLevelCodeOrDefault( tlsStatus ),
-                    mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
-
-        /* Mark these set of errors as a timeout. The libraries may retry read
-         * on these errors. */
-        tlsStatus = 0;
+        LogError( ( "invalid input, pNetworkContext=%p", pNetworkContext ) );
+        tlsStatus = -1;
     }
-    else if( tlsStatus < 0 )
+    else if( pBuffer == NULL )
     {
-        LogError( ( "Failed to read data: mbedTLSError= %s : %s.",
-                    mbedtlsHighLevelCodeOrDefault( tlsStatus ),
-                    mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+        LogError( ( "invalid input, pBuffer == NULL" ) );
+        tlsStatus = -1;
+    }
+    else if( bytesToRecv == 0 )
+    {
+        LogError( ( "invalid input, bytesToRecv == 0" ) );
+        tlsStatus = -1;
     }
     else
     {
-        /* Empty else marker. */
+        pTlsTransportParams = pNetworkContext->pParams;
+
+        tlsStatus = ( int32_t ) mbedtls_ssl_read( &( pTlsTransportParams->sslContext.context ),
+                                                  pBuffer,
+                                                  bytesToRecv );
+
+        if( ( tlsStatus == MBEDTLS_ERR_SSL_TIMEOUT ) ||
+            ( tlsStatus == MBEDTLS_ERR_SSL_WANT_READ ) ||
+            ( tlsStatus == MBEDTLS_ERR_SSL_WANT_WRITE ) )
+        {
+            LogDebug( ( "Failed to read data. However, a read can be retried on this error. "
+                        "mbedTLSError= %s : %s.",
+                        mbedtlsHighLevelCodeOrDefault( tlsStatus ),
+                        mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+
+            /* Mark these set of errors as a timeout. The libraries may retry read
+             * on these errors. */
+            tlsStatus = 0;
+        }
+        else if( tlsStatus < 0 )
+        {
+            LogError( ( "Failed to read data: mbedTLSError= %s : %s.",
+                        mbedtlsHighLevelCodeOrDefault( tlsStatus ),
+                        mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+        }
+        else
+        {
+            /* Empty else marker. */
+        }
     }
 
     return tlsStatus;
@@ -1018,35 +1045,51 @@ int32_t TLS_FreeRTOS_send( NetworkContext_t * pNetworkContext,
     TlsTransportParams_t * pTlsTransportParams = NULL;
     int32_t tlsStatus = 0;
 
-    configASSERT( ( pNetworkContext != NULL ) && ( pNetworkContext->pParams != NULL ) );
-
-    pTlsTransportParams = pNetworkContext->pParams;
-    tlsStatus = ( int32_t ) mbedtls_ssl_write( &( pTlsTransportParams->sslContext.context ),
-                                               pBuffer,
-                                               bytesToSend );
-
-    if( ( tlsStatus == MBEDTLS_ERR_SSL_TIMEOUT ) ||
-        ( tlsStatus == MBEDTLS_ERR_SSL_WANT_READ ) ||
-        ( tlsStatus == MBEDTLS_ERR_SSL_WANT_WRITE ) )
+    if( ( pNetworkContext == NULL ) || ( pNetworkContext->pParams == NULL ) )
     {
-        LogDebug( ( "Failed to send data. However, send can be retried on this error. "
-                    "mbedTLSError= %s : %s.",
-                    mbedtlsHighLevelCodeOrDefault( tlsStatus ),
-                    mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
-
-        /* Mark these set of errors as a timeout. The libraries may retry send
-         * on these errors. */
-        tlsStatus = 0;
+        LogError( ( "invalid input, pNetworkContext=%p", pNetworkContext ) );
+        tlsStatus = -1;
     }
-    else if( tlsStatus < 0 )
+    else if( pBuffer == NULL )
     {
-        LogError( ( "Failed to send data:  mbedTLSError= %s : %s.",
-                    mbedtlsHighLevelCodeOrDefault( tlsStatus ),
-                    mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+        LogError( ( "invalid input, pBuffer == NULL" ) );
+        tlsStatus = -1;
+    }
+    else if( bytesToSend == 0 )
+    {
+        LogError( ( "invalid input, bytesToSend == 0" ) );
+        tlsStatus = -1;
     }
     else
     {
-        /* Empty else marker. */
+        pTlsTransportParams = pNetworkContext->pParams;
+        tlsStatus = ( int32_t ) mbedtls_ssl_write( &( pTlsTransportParams->sslContext.context ),
+                                                   pBuffer,
+                                                   bytesToSend );
+
+        if( ( tlsStatus == MBEDTLS_ERR_SSL_TIMEOUT ) ||
+            ( tlsStatus == MBEDTLS_ERR_SSL_WANT_READ ) ||
+            ( tlsStatus == MBEDTLS_ERR_SSL_WANT_WRITE ) )
+        {
+            LogDebug( ( "Failed to send data. However, send can be retried on this error. "
+                        "mbedTLSError= %s : %s.",
+                        mbedtlsHighLevelCodeOrDefault( tlsStatus ),
+                        mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+
+            /* Mark these set of errors as a timeout. The libraries may retry send
+             * on these errors. */
+            tlsStatus = 0;
+        }
+        else if( tlsStatus < 0 )
+        {
+            LogError( ( "Failed to send data:  mbedTLSError= %s : %s.",
+                        mbedtlsHighLevelCodeOrDefault( tlsStatus ),
+                        mbedtlsLowLevelCodeOrDefault( tlsStatus ) ) );
+        }
+        else
+        {
+            /* Empty else marker. */
+        }
     }
 
     return tlsStatus;
