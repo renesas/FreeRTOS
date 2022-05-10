@@ -31,7 +31,6 @@
 
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
-#include "FreeRTOS_Sockets.h"
 
 /* Sockets wrapper includes. */
 #include "sockets_wrapper.h"

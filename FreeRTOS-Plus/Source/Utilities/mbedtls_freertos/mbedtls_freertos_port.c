@@ -43,6 +43,9 @@
 #include "mbedtls/entropy.h"
 #include "mbedtls/ssl.h"
 
+void * mbedtls_platform_calloc(size_t nmemb, size_t size);
+void   mbedtls_platform_free(void * ptr);
+
 /*-----------------------------------------------------------*/
 
 /**
