@@ -36,7 +36,6 @@
 #include "sockets_wrapper.h"
 
 /* mbed TLS includes. */
-#include "mbedtls_config.h"
 #include "threading_alt.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/ssl.h"
@@ -52,7 +51,7 @@
  *
  * @return Number of bytes sent on success; else a negative value.
  */
-int mbedtls_cellular_send( void * ctx,
+int mbedtls_platform_send( void * ctx,
                            const unsigned char * buf,
                            size_t len )
 {
@@ -73,7 +72,7 @@ int mbedtls_cellular_send( void * ctx,
  *
  * @return Number of bytes received if successful; Negative value on error.
  */
-int mbedtls_cellular_recv( void * ctx,
+int mbedtls_platform_recv( void * ctx,
                            unsigned char * buf,
                            size_t len )
 {
