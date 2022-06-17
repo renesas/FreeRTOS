@@ -205,6 +205,7 @@ static int privateKeySigningCallback( void * pvContext,
                                           const unsigned char * pucHash,
                                           size_t xHashLen,
                                           unsigned char * pucSig,
+                                          size_t xSigLen,
                                           size_t * pxSigLen,
                                           int ( *piRng )( void *,
                                                               unsigned char *,
@@ -745,6 +746,7 @@ static int privateKeySigningCallback( void * pvContext,
                                           const unsigned char * pucHash,
                                           size_t xHashLen,
                                           unsigned char * pucSig,
+                                          size_t xSigLen,
                                           size_t * pxSigLen,
                                           int ( *piRng )( void *,
                                                               unsigned char *,
@@ -762,6 +764,7 @@ static int privateKeySigningCallback( void * pvContext,
     ( void ) ( piRng );
     ( void ) ( pvRng );
     ( void ) ( xMdAlg );
+    ( void ) ( xSigLen );
 
     /* Sanity check buffer length. */
     if( xHashLen > sizeof( xToBeSigned ) )
