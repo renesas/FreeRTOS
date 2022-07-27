@@ -74,13 +74,14 @@ extern void vLoggingPrintf( const char * pcFormatString,
 #include "transport_interface.h"
 
 /* mbed TLS includes. */
+#include "common.h"
+#include "pk_wrap.h"
 #include "mbedtls/ctr_drbg.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/ssl.h"
 #include "mbedtls/threading.h"
 #include "mbedtls/x509.h"
 #include "mbedtls/pk.h"
-#include "mbedtls/pk_internal.h"
 #include "mbedtls/error.h"
 
 /* Undefine the macro for Keil Compiler to avoid conflict: */
