@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -75,7 +74,7 @@ timers must still be above the tick interrupt priority. */
 #define tmrMEDIUM_PRIORITY		( configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 0 )
 #define tmrHIGHER_PRIORITY		( configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY - 1 )
 
-/* Hardware register locations and bit definitions to enable the btimer 
+/* Hardware register locations and bit definitions to enable the btimer
 interrupts. */
 #define tmrGIRQ23_ENABLE_SET	( * ( volatile uint32_t * ) 0x4000C130 )
 #define tmrGIRQ23_BIT_TIMER0	( 1UL << 0UL )

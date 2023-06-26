@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,5 +42,9 @@ void vFakePortAssertIfInterruptPriorityInvalid( void );
 
 void vFakePortEnterCriticalSection( void );
 void vFakePortExitCriticalSection( void );
+void vPortCurrentTaskDying( void * pxTaskToDelete,
+                            volatile BaseType_t * pxPendYield );
+void portSetupTCB_CB( void * tcb );
+void vFakePortAssertIfISR();
 
 #endif /* FAKE_PORT_H */

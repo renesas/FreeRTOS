@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -20,9 +20,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://www.github.com/FreeRTOS
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 #ifndef FREERTOS_CONFIG_H
@@ -68,9 +67,11 @@
 #define configGENERATE_RUN_TIME_STATS	0
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 1
 
-/* Co-routine definitions. */
-#define configUSE_CO_ROUTINES 			0
-#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
+/* Assert definitions. */
+void vAssertCalled( void );
+#define configASSERT_DEFINED                   1
+#define configASSERT( x )                      do { if ( !(x) ) vAssertCalled(); } while(0)
+
 
 /* Software timer definitions. */
 #define configUSE_TIMERS				1
@@ -98,6 +99,7 @@ to exclude the API function. */
 #define INCLUDE_eTaskGetState				1
 #define INCLUDE_xTimerPendFunctionCall		1
 #define INCLUDE_xTaskAbortDelay				1
+#define INCLUDE_xTaskGetCurrentTaskHandle	1
 #define INCLUDE_xTaskGetHandle				1
 #define INCLUDE_xSemaphoreGetMutexHolder	1
 

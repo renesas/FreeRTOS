@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -33,7 +33,7 @@
  *
  * See the following web page for essential demo usage and configuration
  * details:
- * http://www.FreeRTOS.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/examples_FreeRTOS_simulator.html
+ * https://www.FreeRTOS.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/examples_FreeRTOS_simulator.html
  */
 
 /* Standard includes. */
@@ -49,6 +49,8 @@
 /* FreeRTOS+TCP includes. */
 #include "FreeRTOS_IP.h"
 #include "FreeRTOS_Sockets.h"
+
+#include "tcp_echo_config.h"
 
 /* Exclude the whole file if FreeRTOSIPConfig.h is configured to use UDP only. */
 #if( ipconfigUSE_TCP == 1 )
@@ -151,10 +153,7 @@ TickType_t xTimeOnEntering;
 	server is configured by the constants configECHO_SERVER_ADDR0 to
 	configECHO_SERVER_ADDR3 in FreeRTOSConfig.h. */
 	xEchoServerAddress.sin_port = FreeRTOS_htons( echoECHO_PORT );
-	xEchoServerAddress.sin_addr = FreeRTOS_inet_addr_quick( configECHO_SERVER_ADDR0,
-															configECHO_SERVER_ADDR1,
-															configECHO_SERVER_ADDR2,
-															configECHO_SERVER_ADDR3 );
+	xEchoServerAddress.sin_addr = FreeRTOS_inet_addr( configECHO_SERVER_ADDR );
 
 	for( ;; )
 	{
@@ -298,12 +297,14 @@ static BaseType_t prvCreateTxData( char *cBuffer, uint32_t ulBufferLength )
 BaseType_t lCharactersToAdd, lCharacter;
 char cChar = '0';
 const BaseType_t lMinimumLength = 60;
+uint32_t ulRandomNumber;
 
 	/* Randomise the number of characters that will be sent in the echo
 	request. */
 	do
 	{
-		lCharactersToAdd = ipconfigRAND32() % ( ulBufferLength - 20UL );
+                ( void ) xApplicationGetRandomNumber( &ulRandomNumber );
+		lCharactersToAdd = ulRandomNumber % ( ulBufferLength - 20UL );
 	} while ( ( lCharactersToAdd == 0 ) || ( lCharactersToAdd < lMinimumLength ) ); /* Must be at least enough to add the unique text to the start of the string later. */
 
 	/* Fill the buffer. */

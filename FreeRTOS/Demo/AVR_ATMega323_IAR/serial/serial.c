@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 
@@ -57,7 +56,7 @@ static QueueHandle_t xCharsForTx;
 	ucByte = UCSRB;											\
 	ucByte |= serTX_INT_ENABLE;								\
 	outb( UCSRB, ucByte );									\
-}																				
+}
 /*-----------------------------------------------------------*/
 
 #define vInterruptOff()										\
@@ -85,12 +84,12 @@ unsigned char ucByte;
 		data sheet. */
 		ulBaudRateCounter = ( configCPU_CLOCK_HZ / ( serBAUD_DIV_CONSTANT * ulWantedBaud ) ) - ( unsigned long ) 1;
 
-		/* Set the baud rate. */	
-		ucByte = ( unsigned char ) ( ulBaudRateCounter & ( unsigned long ) 0xff );	
+		/* Set the baud rate. */
+		ucByte = ( unsigned char ) ( ulBaudRateCounter & ( unsigned long ) 0xff );
 		outb( UBRRL, ucByte );
 
 		ulBaudRateCounter >>= ( unsigned long ) 8;
-		ucByte = ( unsigned char ) ( ulBaudRateCounter & ( unsigned long ) 0xff );	
+		ucByte = ( unsigned char ) ( ulBaudRateCounter & ( unsigned long ) 0xff );
 		outb( UBRRH, ucByte );
 
 		/* Enable the Rx interrupt.  The Tx interrupt will get enabled
@@ -101,7 +100,7 @@ unsigned char ucByte;
 		outb( UCSRC, serUCSRC_SELECT | serEIGHT_DATA_BITS );
 	}
 	portEXIT_CRITICAL();
-	
+
 	/* Unlike other ports, this serial code does not allow for more than one
 	com port.  We therefore don't return a pointer to a port structure and can
 	instead just return NULL. */

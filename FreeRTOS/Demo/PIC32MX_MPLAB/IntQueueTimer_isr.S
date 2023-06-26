@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,25 +19,24 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
- 
+
 #include <p32xxxx.h>
 #include <sys/asm.h>
 #include "ISR_Support.h"
- 
+
 #define portEXC_CODE_MASK ( 0x1f << 2 )
 
 	.set	nomips16
  	.set 	noreorder
- 	
+
  	.extern vT3InterruptHandler
  	.extern vT4InterruptHandler
 
- 	
+
 	.global vT3InterruptWrapper
 	.global vT4InterruptWrapper
 
@@ -47,7 +46,7 @@
 	.set	noreorder
 	.set 	noat
 	.ent	vT3InterruptWrapper
-	
+
 vT3InterruptWrapper:
 
 	portSAVE_CONTEXT
@@ -64,7 +63,7 @@ vT3InterruptWrapper:
  	.set	noreorder
 	.set 	noat
  	.ent	vT4InterruptWrapper
-	
+
 vT4InterruptWrapper:
 
 	portSAVE_CONTEXT

@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -74,7 +73,7 @@ void vSerialRxISR( void );
 /*-----------------------------------------------------------*/
 
 /* Queues to interface between comms API and interrupt routines. */
-static QueueHandle_t xRxedChars; 
+static QueueHandle_t xRxedChars;
 static QueueHandle_t xCharsForTx;
 
 /*-----------------------------------------------------------*/
@@ -126,7 +125,7 @@ unsigned long ulBaud;
 	portEXIT_CRITICAL();
 
 	/* Unlike other ports, this serial code does not allow for more than one
-	com port.  We therefore don't return a pointer to a port structure and 
+	com port.  We therefore don't return a pointer to a port structure and
 	can	instead just return NULL. */
 	return NULL;
 }
@@ -162,7 +161,7 @@ portBASE_TYPE xSerialPutChar( xComPortHandle pxPort, signed char cOutChar, TickT
 		return pdFAIL;
 	}
 
-	/* Turn interrupt on - ensure the compiler only generates a single 
+	/* Turn interrupt on - ensure the compiler only generates a single
 	instruction for this. */
 	PIE1bits.TXIE = serINTERRUPT_ENABLED;
 
@@ -193,7 +192,7 @@ portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 	if( RCSTAbits.OERR )
 	{
 		RCSTAbits.CREN = serCLEAR_OVERRUN;
-		RCSTAbits.CREN = serCONTINUOUS_RX;	
+		RCSTAbits.CREN = serCONTINUOUS_RX;
 	}
 
 	xQueueSendFromISR( xRxedChars, ( const void * ) &cChar, &xHigherPriorityTaskWoken );

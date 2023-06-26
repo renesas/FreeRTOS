@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -124,7 +123,7 @@ extern unsigned long _ebase_address[];
 
 	/* Setup EBase. */
 	_CP0_SET_EBASE( ( unsigned long ) _ebase_address );
-	
+
 	/* Space vectors by 0x20 bytes. */
 	_CP0_XCH_INTCTL( 0x20 );
 
@@ -139,7 +138,7 @@ extern unsigned long _ebase_address[];
 
 	/* Set MVEC bit. */
 	INTCONbits.MVEC = 1;
-	
+
 	/* Finally enable interrupts again. */
 	ulStatus |= hwGLOBAL_INTERRUPT_BIT;
 	_CP0_SET_STATUS( ulStatus );

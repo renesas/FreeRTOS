@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 
@@ -41,7 +40,7 @@
 #define partstCHANNEL_1		0x01
 #define partstMAX_8BIT_LED	0x07
 
-/* The outputs are split into two IO sections, these variables maintain the 
+/* The outputs are split into two IO sections, these variables maintain the
 current value of either section. */
 static unsigned portBASE_TYPE uxCurrentOutput8Bit, uxCurrentOutput5Bit;
 
@@ -75,7 +74,7 @@ unsigned portBASE_TYPE uxBaseAddress, *puxCurrentValue;
 		{
 			uxBaseAddress = XPAR_LEDS_8BIT_BASEADDR;
 			puxCurrentValue = &uxCurrentOutput5Bit;
-		}	
+		}
 		else
 		{
 			uxBaseAddress = XPAR_LEDS_POSITIONS_BASEADDR;
@@ -116,7 +115,7 @@ unsigned portBASE_TYPE uxBaseAddress, *puxCurrentValue;
 
 			uxBaseAddress = XPAR_LEDS_8BIT_BASEADDR;
 			puxCurrentValue = &uxCurrentOutput5Bit;
-		}	
+		}
 		else
 		{
 			uxBaseAddress = XPAR_LEDS_POSITIONS_BASEADDR;

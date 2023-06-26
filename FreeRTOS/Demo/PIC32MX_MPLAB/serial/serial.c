@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,14 +19,13 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 
-/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER. 
+/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER.
 
 NOTE:  This driver is primarily to test the scheduler functionality.  It does
 not effectively use the buffers or DMA and is therefore not intended to be
@@ -48,8 +47,8 @@ an example of an efficient driver. */
 #define serSET_FLAG						( 1 )
 
 /* The queues used to communicate between tasks and ISR's. */
-static QueueHandle_t xRxedChars; 
-static QueueHandle_t xCharsForTx; 
+static QueueHandle_t xRxedChars;
+static QueueHandle_t xCharsForTx;
 
 /* Flag used to indicate the tx status. */
 static volatile portBASE_TYPE xTxHasEnded;
@@ -58,7 +57,7 @@ static volatile portBASE_TYPE xTxHasEnded;
 
 /* The UART interrupt handler.  As this uses the FreeRTOS assembly interrupt
 entry point the IPL setting in the following prototype has no effect.  The
-interrupt priority is set by the call to  ConfigIntUART2() in 
+interrupt priority is set by the call to  ConfigIntUART2() in
 xSerialPortInitMinimal(). */
 void __attribute__( (interrupt(IPL0AUTO), vector(_UART2_VECTOR))) vU2InterruptWrapper( void );
 

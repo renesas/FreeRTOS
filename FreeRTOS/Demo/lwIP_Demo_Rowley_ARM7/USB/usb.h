@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /* Descriptor type definitions. */
@@ -102,9 +101,9 @@
 #define usbCLASS_INTERFACE_REQUEST			( 5 )
 
 
-/* Macros to manipulate the control and status registers.  These registers 
-cannot be accessed using a direct read modify write operation outside of the 
-ISR as some bits are left unchanged by writing with a 0, and some are left 
+/* Macros to manipulate the control and status registers.  These registers
+cannot be accessed using a direct read modify write operation outside of the
+ISR as some bits are left unchanged by writing with a 0, and some are left
 unchanged by writing with a 1. */
 
 

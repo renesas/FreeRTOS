@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /* Scheduler includes. */
@@ -43,7 +42,7 @@ unsigned portBASE_TYPE uxOutput;
 void vParTestInitialise( void )
 {
 	/* The explorer 16 board has LED's on port A.  All bits are set as output
-	so PORTA is read-modified-written directly.  Two pins have change 
+	so PORTA is read-modified-written directly.  Two pins have change
 	notification pullups that need disabling. */
 	CNPU2bits.CN22PUE = 0;
 	CNPU2bits.CN23PUE = 0;

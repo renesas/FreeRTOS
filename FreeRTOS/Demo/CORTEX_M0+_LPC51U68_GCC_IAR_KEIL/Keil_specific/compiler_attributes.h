@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,19 +19,18 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
-/* Placing variable at specified address. 
-todo: 
-this is commented out intentionally, as it doesn't seem to work. 
+/* Placing variable at specified address.
+todo:
+this is commented out intentionally, as it doesn't seem to work.
 Clean up is needed*/
 
-/* Attribute to place the second FreeRTOS heap in another memory bank, if present. 
+/* Attribute to place the second FreeRTOS heap in another memory bank, if present.
    This is defined as empty, as the linker file (LPC51U68_flash.scf) provided only
-   one bank as heap. Could still have two FreeRTOS heap regions, as long as they fit.  
+   one bank as heap. Could still have two FreeRTOS heap regions, as long as they fit.
 */
 #define COMPILER_ATTRIBUTE_PLACE_IN_2ND_MEMORY_BANK

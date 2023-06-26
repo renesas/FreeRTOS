@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -92,22 +91,22 @@ uint32_t ulInputFrequency;
 	ulInputFrequency = configCPU_CLOCK_HZ;
 	ulInputFrequency /= trmDIVIDER;
 
-	/* Three channels are used - two that run at or under 
+	/* Three channels are used - two that run at or under
 	configMAX_SYSCALL_INTERRUPT_PRIORITY, and one that runs over
 	configMAX_SYSCALL_INTERRUPT_PRIORITY. */
 	sysclk_enable_peripheral_clock( ID_TC0 );
 	sysclk_enable_peripheral_clock( ID_TC1 );
 	sysclk_enable_peripheral_clock( ID_TC2 );
-	
+
 	/* Init TC channels to waveform mode - up mode clean on RC match. */
 	tc_init( TC0, tmrTIMER_0_CHANNEL, TC_CMR_TCCLKS_TIMER_CLOCK4 | TC_CMR_WAVE | TC_CMR_ACPC_CLEAR | TC_CMR_CPCTRG );
 	tc_init( TC0, tmrTIMER_1_CHANNEL, TC_CMR_TCCLKS_TIMER_CLOCK4 | TC_CMR_WAVE | TC_CMR_ACPC_CLEAR | TC_CMR_CPCTRG );
 	tc_init( TC0, tmrTIMER_2_CHANNEL, TC_CMR_TCCLKS_TIMER_CLOCK4 | TC_CMR_WAVE | TC_CMR_ACPC_CLEAR | TC_CMR_CPCTRG );
-	
+
 	tc_enable_interrupt( TC0, tmrTIMER_0_CHANNEL, tmrTRIGGER_ON_RC );
 	tc_enable_interrupt( TC0, tmrTIMER_1_CHANNEL, tmrTRIGGER_ON_RC );
 	tc_enable_interrupt( TC0, tmrTIMER_2_CHANNEL, tmrTRIGGER_ON_RC );
-	
+
 	tc_write_rc( TC0, tmrTIMER_0_CHANNEL, ( ulInputFrequency / tmrTIMER_0_FREQUENCY ) );
 	tc_write_rc( TC0, tmrTIMER_1_CHANNEL, ( ulInputFrequency / tmrTIMER_1_FREQUENCY ) );
 	tc_write_rc( TC0, tmrTIMER_2_CHANNEL, ( ulInputFrequency / tmrTIMER_2_FREQUENCY ) );
@@ -132,7 +131,7 @@ void TC0_Handler( void )
 	caused by a compare on RC? */
 	if( ( tc_get_status( TC0, tmrTIMER_0_CHANNEL ) & ~TC_SR_CPCS ) != 0 )
 	{
-		portYIELD_FROM_ISR( xFirstTimerHandler() );	
+		portYIELD_FROM_ISR( xFirstTimerHandler() );
 	}
 }
 /*-----------------------------------------------------------*/

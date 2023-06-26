@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,14 +19,13 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 
-/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER. 
+/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER.
 
 NOTE:  This driver is primarily to test the scheduler functionality.  It does
 not effectively use the buffers or DMA and is therefore not intended to be
@@ -67,8 +66,8 @@ an example of an efficient driver. */
 
 
 /* The queues used to communicate between tasks and ISR's. */
-static QueueHandle_t xRxedChars; 
-static QueueHandle_t xCharsForTx; 
+static QueueHandle_t xRxedChars;
+static QueueHandle_t xCharsForTx;
 
 static portBASE_TYPE xTxHasEnded;
 /*-----------------------------------------------------------*/

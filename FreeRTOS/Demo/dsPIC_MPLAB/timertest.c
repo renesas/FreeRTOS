@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /* High speed timer test as described in main.c. */
@@ -43,7 +42,7 @@
 /*-----------------------------------------------------------*/
 
 /*
- * Measure the time between this interrupt and the previous interrupt to 
+ * Measure the time between this interrupt and the previous interrupt to
  * calculate the timing jitter.  Remember the maximum value the jitter has
  * ever been calculated to be.
  */
@@ -72,7 +71,7 @@ void vSetupTimerTest( unsigned short usFrequencyHz )
 	/* Timer 4 is going to free run from minimum to maximum value. */
 	PR4 = ( unsigned short ) timerMAX_COUNT;
 
-	/* Setup timer 2 interrupt priority to be above the kernel priority so 
+	/* Setup timer 2 interrupt priority to be above the kernel priority so
 	the timer jitter is not effected by the kernel activity. */
 	IPC1bits.T2IP = configKERNEL_INTERRUPT_PRIORITY + 1;
 
@@ -103,7 +102,7 @@ unsigned short usThisCount, usDifference;
 		usDifference = usThisCount - usLastCount;
 
 		/* Store the difference in the timer values if it is larger than the
-		currently stored largest value.  The difference over and above the 
+		currently stored largest value.  The difference over and above the
 		expected difference will give the 'jitter' in the processing of these
 		interrupts. */
 		if( usDifference > usMaxJitter )
@@ -113,7 +112,7 @@ unsigned short usThisCount, usDifference;
 	}
 	else
 	{
-		/* Don't bother storing any values for the first couple of 
+		/* Don't bother storing any values for the first couple of
 		interrupts. */
 		usSettleCount++;
 	}

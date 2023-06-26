@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,15 +19,14 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
  * Utility functions required to gather run time statistics.  See:
- * http://www.freertos.org/rtos-run-time-stats.html
+ * https://www.FreeRTOS.org/rtos-run-time-stats.html
  *
  * Note that this is a simulated port, where simulated time is a lot slower than
  * real time, therefore the run time counter values have no real meaningful
@@ -51,7 +50,7 @@ void vConfigureTimerForRunTimeStats( void )
 LARGE_INTEGER liPerformanceCounterFrequency, liInitialRunTimeValue;
 
 	/* Initialise the variables used to create the run time stats time base.
-	Run time stats record how much time each task spends in the Running 
+	Run time stats record how much time each task spends in the Running
 	state. */
 
 	if( QueryPerformanceFrequency( &liPerformanceCounterFrequency ) == 0 )
@@ -80,7 +79,7 @@ unsigned long ulReturn;
 	/* What is the performance counter value now? */
 	QueryPerformanceCounter( &liCurrentCount );
 
-	/* Subtract the performance counter value reading taken when the 
+	/* Subtract the performance counter value reading taken when the
 	application started to get a count from that reference point, then
 	scale to (simulated) 1/100ths of a millisecond. */
 	if( llTicksPerHundedthMillisecond == 0 )

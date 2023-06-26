@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /* Scheduler includes. */
@@ -65,7 +64,7 @@ void vParTestInitialise( void )
 {
 	/* This is performed from main() as the io bits are shared with other setup
 	functions.  Ensure the outputs are off to start. */
-	ulLEDReg = partstALL_OUTPUTS_OFF;  
+	ulLEDReg = partstALL_OUTPUTS_OFF;
 
 	/* Enable clock to PIO... */
 	AT91C_BASE_PS->PS_PCER = AT91C_PS_PIO;

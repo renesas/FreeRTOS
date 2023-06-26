@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 #ifndef FREERTOS_CONFIG_H
@@ -41,17 +40,13 @@
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 10 )
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 128 ) /* This can be made smaller if required. */
-#define configTOTAL_HEAP_SIZE		( ( size_t ) ( 32 * 1024 ) ) 
+#define configTOTAL_HEAP_SIZE		( ( size_t ) ( 32 * 1024 ) )
 #define configMAX_TASK_NAME_LEN		( 16 )
 #define configUSE_TRACE_FACILITY	0
 #define configUSE_16_BIT_TICKS		1
 #define configIDLE_SHOULD_YIELD		1
 
-/* Co-routine definitions. */
-#define configUSE_CO_ROUTINES 		0
-#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
-
-/* The maximum number of characters a task name can take, 
+/* The maximum number of characters a task name can take,
 including the null terminator. */
 #define configMAX_TASK_NAME_LEN		 ( 16 )
 
@@ -71,7 +66,7 @@ to exclude the component. */
 /* Use/don't use the trace visualisation. */
 #define configUSE_TRACE_FACILITY              0
 
-/* 
+/*
  * The tick count (and times defined in tick count units) can be either a 16bit
  * or a 32 bit value.  See documentation on http://www.FreeRTOS.org to decide
  * which to use.

@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /* Scheduler includes. */
@@ -52,7 +51,7 @@ uint32_t ulFrequency;
     SysCtlPeripheralEnable( SYSCTL_PERIPH_TIMER3 );
     TimerConfigure( TIMER2_BASE, TIMER_CFG_32_BIT_PER );
     TimerConfigure( TIMER3_BASE, TIMER_CFG_32_BIT_PER );
-	
+
 	/* Set the timer interrupts to be above the kernel.  The interrupts are
 	 assigned different priorities so they nest with each other. */
 	IntPrioritySet( INT_TIMER2A, configMAX_SYSCALL_INTERRUPT_PRIORITY + ( 1 << 5 ) ); /* Shift left 5 as only the top 3 bits are implemented. */
@@ -60,20 +59,20 @@ uint32_t ulFrequency;
 
 	/* Ensure interrupts do not start until the scheduler is running. */
 	portDISABLE_INTERRUPTS();
-	
+
 	/* The rate at which the timers will interrupt. */
-	ulFrequency = configCPU_CLOCK_HZ / tmrTIMER_2_FREQUENCY;	
+	ulFrequency = configCPU_CLOCK_HZ / tmrTIMER_2_FREQUENCY;
     TimerLoadSet( TIMER2_BASE, TIMER_A, ulFrequency );
     IntEnable( INT_TIMER2A );
     TimerIntEnable( TIMER2_BASE, TIMER_TIMA_TIMEOUT );
 
 	/* The rate at which the timers will interrupt. */
-	ulFrequency = configCPU_CLOCK_HZ / tmrTIMER_3_FREQUENCY;	
+	ulFrequency = configCPU_CLOCK_HZ / tmrTIMER_3_FREQUENCY;
     TimerLoadSet( TIMER3_BASE, TIMER_A, ulFrequency );
     IntEnable( INT_TIMER3A );
     TimerIntEnable( TIMER3_BASE, TIMER_TIMA_TIMEOUT );
 
-    /* Enable both timers. */	
+    /* Enable both timers. */
     TimerEnable( TIMER2_BASE, TIMER_A );
     TimerEnable( TIMER3_BASE, TIMER_A );
 }
@@ -81,7 +80,7 @@ uint32_t ulFrequency;
 
 void vT2InterruptHandler( void )
 {
-    TimerIntClear( TIMER2_BASE, TIMER_TIMA_TIMEOUT );	
+    TimerIntClear( TIMER2_BASE, TIMER_TIMA_TIMEOUT );
 	portEND_SWITCHING_ISR( xFirstTimerHandler() );
 }
 /*-----------------------------------------------------------*/

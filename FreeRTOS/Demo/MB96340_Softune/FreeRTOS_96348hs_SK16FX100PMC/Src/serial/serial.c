@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,14 +19,13 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
-/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER.   
- * 
+/* BASIC INTERRUPT DRIVEN SERIAL PORT DRIVER.
+ *
  * This file only supports UART 0
  */
 
@@ -115,7 +114,7 @@ signed portBASE_TYPE	xReturn;
 	{
 		if( sTHREEmpty == pdTRUE )
 		{
-			/* If sTHREEmpty is true then the UART Tx ISR has indicated that 
+			/* If sTHREEmpty is true then the UART Tx ISR has indicated that
 			there are no characters queued to be transmitted - so we can
 			write the character directly to the shift Tx register. */
 			sTHREEmpty = pdFALSE;
@@ -125,10 +124,10 @@ signed portBASE_TYPE	xReturn;
 		else
 		{
 			/* sTHREEmpty is false, so there are still characters waiting to be
-			transmitted.  We have to queue this character so it gets 
+			transmitted.  We have to queue this character so it gets
 			transmitted	in turn. */
 
-			/* Return false if after the block time there is no room on the Tx 
+			/* Return false if after the block time there is no room on the Tx
 			queue.  It is ok to block inside a critical section as each task
 			maintains it's own critical section status. */
 			if( xQueueSend(xCharsForTx, &cOutChar, xBlockTime) == pdTRUE )
@@ -164,7 +163,7 @@ __interrupt void UART0_RxISR( void )
 volatile signed char	cChar;
 portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
-	/* Get the character from the UART and post it on the queue of Rxed 
+	/* Get the character from the UART and post it on the queue of Rxed
 	characters. */
 	cChar = RDR0;
 
@@ -172,8 +171,8 @@ portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
 	if( xHigherPriorityTaskWoken )
 	{
-		/*If the post causes a task to wake force a context switch 
-		as the woken task may have a higher priority than the task we have 
+		/*If the post causes a task to wake force a context switch
+		as the woken task may have a higher priority than the task we have
 		interrupted. */
 		portYIELD_FROM_ISR();
 	}

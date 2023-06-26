@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /******************************************************************************
@@ -142,11 +141,11 @@ void vApplicationIdleHook( void )
 	important that vApplicationIdleHook() is permitted to return to its calling
 	function, because it is the responsibility of the idle task to clean up
 	memory allocated by the kernel to any task that has since been deleted. */
-	
+
 	#if ( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 0 )
 	{
 	extern void vFullDemoIdleHook( void );
-	
+
 		vFullDemoIdleHook();
 	}
 	#endif /* mainCREATE_SIMPLE_BLINKY_DEMO_ONLY */
@@ -177,7 +176,7 @@ void vApplicationTickHook( void )
 	#if ( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 0 )
 	{
 	extern void vFullDemoTickHook( void );
-	
+
 		vFullDemoTickHook();
 	}
 	#endif /* mainCREATE_SIMPLE_BLINKY_DEMO_ONLY */

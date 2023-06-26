@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*-----------------------------------------------------------
@@ -52,7 +51,7 @@ static unsigned long ulLedStates;
 void vParTestInitialise( void )
 {
 	IOWR_ALTERA_AVALON_PIO_DIRECTION( LED_PIO_BASE, ALTERA_AVALON_PIO_DIRECTION_OUTPUT );
-	ulLedStates = 0;    
+	ulLedStates = 0;
 }
 /*-----------------------------------------------------------*/
 
@@ -84,7 +83,7 @@ void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 		taskENTER_CRITICAL();
 		{
 			vParTestSetLED( uxLED, !( ulLedStates & ( 1 << uxLED ) ) );
-		}	
+		}
 		taskEXIT_CRITICAL();
 	}
 }

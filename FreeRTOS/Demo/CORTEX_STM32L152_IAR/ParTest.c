@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*-----------------------------------------------------------
@@ -51,7 +50,7 @@ void vParTestInitialise( void )
 	STM_EVAL_LEDOff( LED1 );
 	STM_EVAL_LEDOff( LED2 );
 	STM_EVAL_LEDOff( LED3 );
-	STM_EVAL_LEDOff( LED4 );	
+	STM_EVAL_LEDOff( LED4 );
 }
 /*-----------------------------------------------------------*/
 
@@ -65,15 +64,15 @@ void vParTestSetLED( unsigned portBASE_TYPE uxLED, signed portBASE_TYPE xValue )
 			{
 				case 0: STM_EVAL_LEDOn( LED1 );
 						break;
-	
+
 				case 1: STM_EVAL_LEDOn( LED2 );
 						break;
-	
+
 				case 2: STM_EVAL_LEDOn( LED3 );
 						break;
-	
+
 				case 3: STM_EVAL_LEDOn( LED4 );
-						break;					
+						break;
 			}
 		}
 		else
@@ -82,15 +81,15 @@ void vParTestSetLED( unsigned portBASE_TYPE uxLED, signed portBASE_TYPE xValue )
 			{
 				case 0: STM_EVAL_LEDOff( LED1 );
 						break;
-	
+
 				case 1: STM_EVAL_LEDOff( LED2 );
 						break;
-	
+
 				case 2: STM_EVAL_LEDOff( LED3 );
 						break;
-	
+
 				case 3: STM_EVAL_LEDOff( LED4 );
-						break;					
+						break;
 			}
 		}
 	}
@@ -114,7 +113,7 @@ void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 					break;
 
 			case 3: STM_EVAL_LEDToggle( LED4 );
-					break;					
+					break;
 		}
 	}
 	xTaskResumeAll();

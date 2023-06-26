@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -66,7 +65,7 @@ void vInitialiseTimerForIntQueueTest( void )
 		/* Give write access. */
 		SYSTEM.PRCR.WORD = 0xa502;
 
-		/* Cascade two 8bit timer channels to generate the interrupts. 
+		/* Cascade two 8bit timer channels to generate the interrupts.
 		8bit timer unit 1 (TMR0 and TMR1) and 8bit timer unit 2 (TMR2 and TMR3 are
 		utilised for this test. */
 
@@ -89,11 +88,11 @@ void vInitialiseTimerForIntQueueTest( void )
 		/* 16 bit operation ( count from timer 1,2 ). */
 		TMR0.TCCR.BIT.CSS = 3;
 		TMR2.TCCR.BIT.CSS = 3;
-	
+
 		/* Use PCLK as the input. */
 		TMR1.TCCR.BIT.CSS = 1;
 		TMR3.TCCR.BIT.CSS = 1;
-	
+
 		/* Divide PCLK by 8. */
 		TMR1.TCCR.BIT.CKS = 2;
 		TMR3.TCCR.BIT.CKS = 2;

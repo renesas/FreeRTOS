@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 #ifndef DEMO_CONFIG_H
@@ -73,8 +72,8 @@ extern void vLoggingPrintf( const char * pcFormatString,
  *
  * @note According to the SNTPv4 specification, the polling interval MUST NOT be less
  * than 15 seconds for responsible use of time servers by SNTP clients.
- * 
- * 
+ *
+ *
  * #define democonfigSNTP_CLIENT_POLLING_INTERVAL_SECONDS                  ( 16 )
  */
 

@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,7 +29,7 @@
  *
  * See the following web page for essential TwoEchoClient.c usage and 
  * configuration details:
- * http://www.FreeRTOS.org/FreeRTOS-Plus/FreeRTOS_Plus_UDP/Embedded_Ethernet_Examples/Common_Echo_Clients.shtml
+ * https://www.FreeRTOS.org/FreeRTOS-Plus/FreeRTOS_Plus_UDP/Embedded_Ethernet_Examples/Common_Echo_Clients.shtml
  *
  ******************************************************************************/
 
@@ -46,6 +46,9 @@
 /* FreeRTOS+UDP includes. */
 #include "FreeRTOS_IP.h"
 #include "FreeRTOS_Sockets.h"
+
+/* Demo Includes */
+#include "user_settings.h"
 
 /* Small delay used between attempts to obtain a zero copy buffer. */
 #define echoTINY_DELAY	( ( portTickType ) 2 )

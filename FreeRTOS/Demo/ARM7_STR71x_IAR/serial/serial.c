@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -74,7 +73,7 @@ __arm void vSerialISR( void );
 xComPortHandle xSerialPortInitMinimal( unsigned long ulWantedBaud, unsigned portBASE_TYPE uxQueueLength )
 {
 xComPortHandle xReturn;
-	
+
 	/* Create the queues used to hold Rx and Tx characters. */
 	xRxedChars = xQueueCreate( uxQueueLength, ( unsigned portBASE_TYPE ) sizeof( signed char ) );
 	xCharsForTx = xQueueCreate( uxQueueLength + 1, ( unsigned portBASE_TYPE ) sizeof( signed char ) );
@@ -210,7 +209,7 @@ portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 		{
 			/* Queue empty, nothing to send so turn off the Tx interrupt. */
 			serINTERRUPT_OFF();
-		}		
+		}
 	}
 
 	if( usStatus & 	UART_RxBufFull )
@@ -234,4 +233,4 @@ portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
 
 
-	
+

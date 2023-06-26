@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*-----------------------------------------------------------
@@ -49,7 +48,7 @@ void vParTestInitialise( void )
 	/* Set to output. */
 	FM3_GPIO->DDR1 |= 0xFFFF;
 	FM3_GPIO->DDR3 |= 0xFFFF;
-	
+
 	/* Set as GPIO. */
 	FM3_GPIO->PFR1 &= 0x0000;
 	FM3_GPIO->PFR3 &= 0x0000;

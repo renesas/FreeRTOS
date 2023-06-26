@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202112.00
+ * FreeRTOS V202212.01
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,10 +19,9 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * https://www.FreeRTOS.org
+ * https://github.com/FreeRTOS
  *
- * 1 tab == 4 spaces!
  */
 
 /*
@@ -54,7 +53,7 @@ Changes from V3.0.1
 		 * Queue to interface between comms API and interrupt routine.
 		*/
 		extern QueueHandle_t xRxedChars;
-		
+
 		/*
 		 * Because we are not allowed to use local variables here,
 		 * PRODL is (ab)used as temporary storage.  This is allowed
@@ -88,7 +87,7 @@ Changes from V3.0.1
 			if( bOERR )
 			{
 				bCREN = serCLEAR_OVERRUN;
-				bCREN = serCONTINUOUS_RX;	
+				bCREN = serCONTINUOUS_RX;
 			}
 
 			xHigherPriorityTaskWoken = pdFALSE;
