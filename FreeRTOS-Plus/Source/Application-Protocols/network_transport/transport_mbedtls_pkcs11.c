@@ -25,7 +25,7 @@
  */
 
 /**
- * @file using_mbedtls_pkcs11.c
+ * @file transport_mbedtls_pkcs11.c
  * @brief TLS transport interface implementations. This implementation uses
  * mbedTLS.
  */
@@ -59,8 +59,6 @@
 #include "core_pkcs11.h"
 #include "pkcs11.h"
 #include "core_pki_utils.h"
-
-#include "mbedtls_bio_freertos.h"
 
 /*-----------------------------------------------------------*/
 
@@ -195,7 +193,7 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
  *
  * @return Zero on success.
  */
-static int privateKeySigningCallback( void * pvContext,
+static int32_t privateKeySigningCallback( void * pvContext,
                                           mbedtls_md_type_t xMdAlg,
                                           const unsigned char * pucHash,
                                           size_t xHashLen,
@@ -479,7 +477,7 @@ static TlsTransportStatus_t tlsSetup( NetworkContext_t * pNetworkContext,
 /*-----------------------------------------------------------*/
 
 
-static int32_t generateRandomBytes( void * pvCtx,
+static int generateRandomBytes( void * pvCtx,
                                     unsigned char * pucRandom,
                                     size_t xRandomLength )
 {

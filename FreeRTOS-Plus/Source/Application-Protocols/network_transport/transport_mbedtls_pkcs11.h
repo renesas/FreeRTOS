@@ -25,7 +25,7 @@
  */
 
 /**
- * @file using_mbedtls_pkcs11.h
+ * @file transport_mbedtls_pkcs11.h
  * @brief TLS transport interface header.
  * @note This file is derived from the tls_freertos.h header file found in the mqtt
  * section of IoT Libraries source code. The file has been modified to support using
@@ -46,8 +46,6 @@
 #include "transport_interface.h"
 
 /* mbed TLS includes. */
-#include "common.h"
-#include "pk_wrap.h"
 #include "mbedtls/ctr_drbg.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/ssl.h"
@@ -56,8 +54,8 @@
 #include "mbedtls/pk.h"
 #include "mbedtls/error.h"
 
+#include "pk_wrap.h"
 /* Undefine the macro for Keil Compiler to avoid conflict: */
-/* __PASTE macro redefinition [-Wmacro-redefinition] */
 #if defined(__ARMCC_VERSION)
  #pragma GCC diagnostic push
  #pragma GCC diagnostic ignored "-Wmacro-redefined"

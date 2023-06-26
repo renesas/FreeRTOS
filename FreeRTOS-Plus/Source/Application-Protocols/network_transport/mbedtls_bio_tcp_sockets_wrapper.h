@@ -32,17 +32,6 @@
 #ifndef MBEDTLS_BIO_TCP_SOCKETS_WRAPPER
 #define MBEDTLS_BIO_TCP_SOCKETS_WRAPPER
 
-/* FreeRTOS includes. */
-#include "FreeRTOS.h"
-
-/* Sockets wrapper includes. */
-#include "sockets_wrapper.h"
-
-/* mbed TLS includes. */
-#include "threading_alt.h"
-#include "mbedtls/entropy.h"
-#include "mbedtls/ssl.h"
-
 /**
  * @brief Sends data over TCP socket.
  *

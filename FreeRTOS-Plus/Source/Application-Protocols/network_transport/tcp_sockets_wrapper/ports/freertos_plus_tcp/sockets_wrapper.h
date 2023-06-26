@@ -39,8 +39,6 @@
 
 #define SOCKETS_INVALID_SOCKET      ( ( Socket_t ) ~0U )
 
-#define SOCKETS_INVALID_SOCKET      ( ( Socket_t ) ~0U )
-
 /**
  * @brief Establish a connection to server.
  *

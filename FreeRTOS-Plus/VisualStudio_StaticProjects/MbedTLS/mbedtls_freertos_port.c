@@ -224,7 +224,7 @@ int (* mbedtls_mutex_unlock)( mbedtls_threading_mutex_t * mutex ) = mbedtls_plat
     #elif defined( ARM_RDI_MONITOR ) || defined( SEMIHOSTING )
         #define RNG_SOURCE_SEMIHOST
     #else
-        #define RNG_SOURCE_DEV_RANDOM
+        // #define RNG_SOURCE_DEV_RANDOM
     #endif
 
     #if defined(RNG_SOURCE_WINDOWS_CRYPT)
@@ -322,7 +322,7 @@ int (* mbedtls_mutex_unlock)( mbedtls_threading_mutex_t * mutex ) = mbedtls_plat
             ( void ) _close( file );
             return rslt;
         }
-    #else
+    #elif defined( RNG_SOURCE_DEV_RANDOM )
         #include <stdio.h>
         int mbedtls_hardware_poll( void * data,
                                    unsigned char * output,
@@ -354,6 +354,8 @@ int (* mbedtls_mutex_unlock)( mbedtls_threading_mutex_t * mutex ) = mbedtls_plat
             }
             return rslt;
         }
+    #else
+        /* Use Renesas version */
     #endif
 #endif
 /*-----------------------------------------------------------*/
