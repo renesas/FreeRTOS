@@ -26,8 +26,14 @@
 
 #include "logging_levels.h"
 
-#define LIBRARY_LOG_NAME     "MbedTLSRNGP11"
-#define LIBRARY_LOG_LEVEL    LOG_ERROR
+/* Logging configuration for MbedTLSRNGP11. */
+#ifndef LIBRARY_LOG_NAME
+    #define LIBRARY_LOG_NAME    "MbedTLSRNGP11"
+#endif
+
+#ifndef LIBRARY_LOG_LEVEL
+    #define LIBRARY_LOG_LEVEL    LOG_ERROR
+#endif
 
 #include "logging_stack.h"
 
