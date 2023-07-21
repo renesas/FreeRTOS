@@ -33,7 +33,7 @@
 	url = https://github.com/aws/device-defender-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreHTTP
-	url = https://github.com/FreeRTOS/coreHTTP
+	url = git@pbgitap01.rea.renesas.com:peaks/corehttp.git
 [submodule "FreeRTOS-Plus/Source/Utilities/backoff_algorithm"]
 	path = FreeRTOS-Plus/Source/Utilities/backoff_algorithm
 	url = https://github.com/FreeRTOS/backoffAlgorithm.git
