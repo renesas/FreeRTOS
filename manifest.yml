@@ -35,7 +35,7 @@ dependencies:
     version: "v3.0.0"
     repository:
       type: "git"
-      url: "git@pbgitap01.rea.renesas.com:peaks/corehttp.git"
+      url: "https://github.com/renesas/coreHTTP.git"
       path: "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"
 
   - name: "coreMQTT"
