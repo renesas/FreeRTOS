@@ -30,19 +30,6 @@
  * mbedTLS.
  */
 
-#include "logging_levels.h"
-
-/* Logging configuration for PkcsTlsTransport. */
-#ifndef LIBRARY_LOG_NAME
-    #define LIBRARY_LOG_NAME    "PkcsTlsTransport"
-#endif
-
-#ifndef LIBRARY_LOG_LEVEL
-    #define LIBRARY_LOG_LEVEL    LOG_ERROR
-#endif
-
-#include "logging_stack.h"
-
 #define MBEDTLS_ALLOW_PRIVATE_ACCESS
 
 #include "mbedtls/private_access.h"

@@ -24,19 +24,6 @@
  *
  */
 
-#include "logging_levels.h"
-
-/* Logging configuration for MbedTLSPkP11. */
-#ifndef LIBRARY_LOG_NAME
-    #define LIBRARY_LOG_NAME    "MbedTLSPkP11"
-#endif
-
-#ifndef LIBRARY_LOG_LEVEL
-    #define LIBRARY_LOG_LEVEL    LOG_ERROR
-#endif
-
-#include "logging_stack.h"
-
 /**
  * @file mbedtls_pk_pkcs11.c
  * @brief mbedtls_pk implementation for pkcs11 ECDSA and RSA keys.
