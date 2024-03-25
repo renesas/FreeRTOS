@@ -112,7 +112,7 @@ static void p11_ecdsa_ctx_free( void * pvCtx );
  * @return 0 on success
  * @return A negative number on failure
  */
-static int p11_ecdsa_sign( void * pvCtx,
+static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
@@ -128,7 +128,7 @@ static int p11_ecdsa_sign( void * pvCtx,
  * @param pvCtx Void pointer to the relevant P11EcDsaCtx_t.
  * @return size_t Bit length of the key.
  */
-static size_t p11_ecdsa_get_bitlen( const void * pvCtx );
+static size_t p11_ecdsa_get_bitlen( mbedtls_pk_context * pvCtx );
 
 /**
  * @brief Returns true if the pk context can perform the given pk operation.
@@ -153,19 +153,19 @@ static int p11_ecdsa_can_do( mbedtls_pk_type_t xType );
  * @param xSigLen Length of the signature given in pucSig
  * @return 0 on success
  */
-static int p11_ecdsa_verify( void * pvCtx,
+static int p11_ecdsa_verify( mbedtls_pk_context * pvCtx,
                              mbedtls_md_type_t xMdAlg,
                              const unsigned char * pucHash,
                              size_t xHashLen,
                              const unsigned char * pucSig,
                              size_t xSigLen );
 
-static int p11_ecdsa_check_pair( const void * pvPub,
-                                 const void * pvPrv,
+static int p11_ecdsa_check_pair( mbedtls_pk_context * pvPub,
+                                 mbedtls_pk_context * pvPrv,
                                  int ( * lFRng )( void *, unsigned char *, size_t ),
                                  void * pvPRng );
 
-static void p11_ecdsa_debug( const void * pvCtx,
+static void p11_ecdsa_debug( mbedtls_pk_context * pvCtx,
                              mbedtls_pk_debug_item * pxItems );
 
 static int prvEcdsaSigToASN1InPlace( unsigned char * pucSig,
@@ -206,18 +206,18 @@ mbedtls_pk_info_t mbedtls_pkcs11_pk_ecdsa =
 
 /*-----------------------------------------------------------*/
 
-static size_t p11_rsa_get_bitlen( const void * pvCtx );
+static size_t p11_rsa_get_bitlen( mbedtls_pk_context * pvCtx );
 
 static int p11_rsa_can_do( mbedtls_pk_type_t xType );
 
-static int p11_rsa_verify( void * pvCtx,
+static int p11_rsa_verify( mbedtls_pk_context * pvCtx,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
                            const unsigned char * pucSig,
                            size_t xSigLen );
 
-static int p11_rsa_sign( void * ctx,
+static int p11_rsa_sign( mbedtls_pk_context * ctx,
                          mbedtls_md_type_t md_alg,
                          const unsigned char * hash,
                          size_t hash_len,
@@ -227,8 +227,8 @@ static int p11_rsa_sign( void * ctx,
                          int ( * f_rng )( void *, unsigned char *, size_t ),
                          void * p_rng );
 
-static int p11_rsa_check_pair( const void * pvPub,
-                               const void * pvPrv,
+static int p11_rsa_check_pair( mbedtls_pk_context * pvPub,
+                               mbedtls_pk_context * pvPrv,
                                int ( * lFRng )( void *, unsigned char *, size_t ),
                                void * pvPRng );
 
@@ -241,7 +241,7 @@ static CK_RV p11_rsa_ctx_init( void * pvCtx,
 
 static void p11_rsa_ctx_free( void * pvCtx );
 
-static void p11_rsa_debug( const void * pvCtx,
+static void p11_rsa_debug( mbedtls_pk_context * pvCtx,
                            mbedtls_pk_debug_item * pxItems );
 
 /*-----------------------------------------------------------*/
@@ -649,7 +649,7 @@ static int prvEcdsaSigToASN1InPlace( unsigned char * pucSig,
 
 /*-----------------------------------------------------------*/
 
-static int p11_ecdsa_sign( void * pvCtx,
+static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
@@ -732,7 +732,7 @@ static int p11_ecdsa_sign( void * pvCtx,
 
 /*-----------------------------------------------------------*/
 
-static size_t p11_ecdsa_get_bitlen( const void * pvCtx )
+static size_t p11_ecdsa_get_bitlen( mbedtls_pk_context * pvCtx )
 {
     P11EcDsaCtx_t * pxEcDsaCtx = ( P11EcDsaCtx_t * ) pvCtx;
 
@@ -750,7 +750,7 @@ static int p11_ecdsa_can_do( mbedtls_pk_type_t xType )
 
 /*-----------------------------------------------------------*/
 
-static int p11_ecdsa_verify( void * pvCtx,
+static int p11_ecdsa_verify( mbedtls_pk_context * pvCtx,
                              mbedtls_md_type_t xMdAlg,
                              const unsigned char * pucHash,
                              size_t xHashLen,
@@ -769,8 +769,8 @@ static int p11_ecdsa_verify( void * pvCtx,
 
 /*-----------------------------------------------------------*/
 
-static int p11_ecdsa_check_pair( const void * pvPub,
-                                 const void * pvPrv,
+static int p11_ecdsa_check_pair( mbedtls_pk_context * pvPub,
+                                 mbedtls_pk_context * pvPrv,
                                  int ( * lFRng )( void *, unsigned char *, size_t ),
                                  void * pvPRng )
 {
@@ -843,7 +843,7 @@ static int p11_ecdsa_check_pair( const void * pvPub,
 
 /*-----------------------------------------------------------*/
 
-static void p11_ecdsa_debug( const void * pvCtx,
+static void p11_ecdsa_debug( mbedtls_pk_context * pvCtx,
                              mbedtls_pk_debug_item * pxItems )
 {
     P11EcDsaCtx_t * pxEcDsaCtx = ( P11EcDsaCtx_t * ) pvCtx;
@@ -855,7 +855,7 @@ static void p11_ecdsa_debug( const void * pvCtx,
 
 /*-----------------------------------------------------------*/
 
-static size_t p11_rsa_get_bitlen( const void * pvCtx )
+static size_t p11_rsa_get_bitlen( mbedtls_pk_context * pvCtx )
 {
     P11RsaCtx_t * pxRsaCtx = ( P11RsaCtx_t * ) pvCtx;
 
@@ -873,7 +873,7 @@ static int p11_rsa_can_do( mbedtls_pk_type_t xType )
 
 /*-----------------------------------------------------------*/
 
-static int p11_rsa_verify( void * pvCtx,
+static int p11_rsa_verify( mbedtls_pk_context * pvCtx,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
@@ -892,7 +892,7 @@ static int p11_rsa_verify( void * pvCtx,
 
 /*-----------------------------------------------------------*/
 
-static int p11_rsa_sign( void * pvCtx,
+static int p11_rsa_sign( mbedtls_pk_context * pvCtx,
                          mbedtls_md_type_t xMdAlg,
                          const unsigned char * pucHash,
                          size_t xHashLen,
@@ -982,8 +982,8 @@ static int p11_rsa_sign( void * pvCtx,
 
 /*-----------------------------------------------------------*/
 
-static int p11_rsa_check_pair( const void * pvPub,
-                               const void * pvPrv,
+static int p11_rsa_check_pair( mbedtls_pk_context * pvPub,
+                               mbedtls_pk_context * pvPrv,
                                int ( * lFRng )( void *, unsigned char *, size_t ),
                                void * pvPRng )
 {
@@ -1087,7 +1087,7 @@ static void p11_rsa_ctx_free( void * pvCtx )
 
 /*-----------------------------------------------------------*/
 
-static void p11_rsa_debug( const void * pvCtx,
+static void p11_rsa_debug( mbedtls_pk_context * pvCtx,
                            mbedtls_pk_debug_item * pxItems )
 {
     P11RsaCtx_t * pxP11RsaCtx = ( P11RsaCtx_t * ) pvCtx;
