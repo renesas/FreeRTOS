@@ -33,7 +33,22 @@
 #include <string.h>
 
 /* Mbedtls Includes */
-#define MBEDTLS_ALLOW_PRIVATE_ACCESS
+#ifndef MBEDTLS_ALLOW_PRIVATE_ACCESS
+    #define MBEDTLS_ALLOW_PRIVATE_ACCESS
+#endif /* MBEDTLS_ALLOW_PRIVATE_ACCESS */
+
+/* MBedTLS Includes */
+#if !defined( MBEDTLS_CONFIG_FILE )
+    #include "mbedtls/config.h"
+#else
+    #include MBEDTLS_CONFIG_FILE
+#endif
+
+#ifdef MBEDTLS_PSA_CRYPTO_C
+    /* MbedTLS PSA Includes */
+    #include "psa/crypto.h"
+    #include "psa/crypto_values.h"
+#endif /* MBEDTLS_PSA_CRYPTO_C */
 
 #include "mbedtls/pk.h"
 #include "mbedtls/asn1.h"
@@ -85,7 +100,7 @@ static void * p11_ecdsa_ctx_alloc( void );
  * @param xPkHandle The CK_OBJECT_HANDLE for the target private key.
  * @return CKR_OK on success
  */
-static CK_RV p11_ecdsa_ctx_init( void * pvCtx,
+static CK_RV p11_ecdsa_ctx_init( mbedtls_pk_context * pk,
                                  CK_FUNCTION_LIST_PTR pxFunctionList,
                                  CK_SESSION_HANDLE xSessionHandle,
                                  CK_OBJECT_HANDLE xPkHandle );
@@ -112,7 +127,7 @@ static void p11_ecdsa_ctx_free( void * pvCtx );
  * @return 0 on success
  * @return A negative number on failure
  */
-static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
+static int p11_ecdsa_sign( mbedtls_pk_context * pk,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
@@ -217,7 +232,7 @@ static int p11_rsa_verify( mbedtls_pk_context * pxMbedtlsPkCtx,
                            const unsigned char * pucSig,
                            size_t xSigLen );
 
-static int p11_rsa_sign( mbedtls_pk_context * ctx,
+static int p11_rsa_sign( mbedtls_pk_context * pk,
                          mbedtls_md_type_t md_alg,
                          const unsigned char * hash,
                          size_t hash_len,
@@ -234,7 +249,7 @@ static int p11_rsa_check_pair( mbedtls_pk_context * pvPub,
 
 static void * p11_rsa_ctx_alloc( void );
 
-static CK_RV p11_rsa_ctx_init( void * pvCtx,
+static CK_RV p11_rsa_ctx_init( mbedtls_pk_context * pk,
                                CK_FUNCTION_LIST_PTR pxFunctionList,
                                CK_SESSION_HANDLE xSessionHandle,
                                CK_OBJECT_HANDLE xPkHandle );
@@ -415,13 +430,13 @@ static void p11_ecdsa_ctx_free( void * pvCtx )
 
 /*-----------------------------------------------------------*/
 
-static CK_RV p11_ecdsa_ctx_init( void * pvCtx,
+static CK_RV p11_ecdsa_ctx_init( mbedtls_pk_context * pk,
                                  CK_FUNCTION_LIST_PTR pxFunctionList,
                                  CK_SESSION_HANDLE xSessionHandle,
                                  CK_OBJECT_HANDLE xPkHandle )
 {
     CK_RV xResult = CKR_OK;
-    P11EcDsaCtx_t * pxP11EcDsaCtx = ( P11EcDsaCtx_t * ) pvCtx;
+    P11EcDsaCtx_t * pxP11EcDsaCtx = ( P11EcDsaCtx_t * ) pk;
     mbedtls_ecdsa_context * pxMbedEcDsaCtx = NULL;
 
     configASSERT( pxFunctionList != NULL );
@@ -434,95 +449,95 @@ static CK_RV p11_ecdsa_ctx_init( void * pvCtx,
     }
     else
     {
+    	LogError( ( "Received a NULL mbedtls_pk_context" ) );
         xResult = CKR_FUNCTION_FAILED;
     }
 
-    /* Initialize public EC parameter data from attributes */
-
-    CK_ATTRIBUTE pxAttrs[ 2 ] =
-    {
-        { .type = CKA_EC_PARAMS, .ulValueLen = 0, .pValue = NULL },
-        { .type = CKA_EC_POINT,  .ulValueLen = 0, .pValue = NULL }
-    };
-
-    /* Determine necessary size */
-    xResult = pxFunctionList->C_GetAttributeValue( xSessionHandle,
-                                                   xPkHandle,
-                                                   pxAttrs,
-                                                   sizeof( pxAttrs ) / sizeof( CK_ATTRIBUTE ) );
-
     if( xResult == CKR_OK )
     {
-        if( pxAttrs[ 0 ].ulValueLen > 0 )
+        /* Initialize public EC parameter data from attributes */
+        CK_ATTRIBUTE pxAttrs[ 2 ] =
         {
-            pxAttrs[ 0 ].pValue = pvPortMalloc( pxAttrs[ 0 ].ulValueLen );
-        }
-
-        if( pxAttrs[ 1 ].ulValueLen > 0 )
-        {
-            pxAttrs[ 1 ].pValue = pvPortMalloc( pxAttrs[ 1 ].ulValueLen );
-        }
+                { .type = CKA_EC_PARAMS, .ulValueLen = 0, .pValue = NULL },
+                { .type = CKA_EC_POINT,  .ulValueLen = 0, .pValue = NULL }
+        };
 
         xResult = pxFunctionList->C_GetAttributeValue( xSessionHandle,
                                                        xPkHandle,
                                                        pxAttrs,
-                                                       2 );
-    }
+													   sizeof( pxAttrs ) / sizeof( CK_ATTRIBUTE ) );
 
-    /* Parse EC Group */
-    if( xResult == CKR_OK )
-    {
-        /*TODO: Parse the ECParameters object */
-        int lResult = mbedtls_ecp_group_load( &( pxMbedEcDsaCtx->grp ), MBEDTLS_ECP_DP_SECP256R1 );
-
-        if( lResult != 0 )
+        if( xResult == CKR_OK )
         {
-            xResult = CKR_FUNCTION_FAILED;
-        }
-    }
+            if( pxAttrs[ 0 ].ulValueLen > 0 )
+            {
+                pxAttrs[ 0 ].pValue = pvPortMalloc( pxAttrs[ 0 ].ulValueLen );
+            }
 
-    /* Parse ECPoint */
-    if( xResult == CKR_OK )
-    {
-        unsigned char * pucIterator = pxAttrs[ 1 ].pValue;
-        size_t uxLen = pxAttrs[ 1 ].ulValueLen;
-        int lResult = 0;
+            if( pxAttrs[ 1 ].ulValueLen > 0 )
+            {
+                pxAttrs[ 1 ].pValue = pvPortMalloc( pxAttrs[ 1 ].ulValueLen );
+            }
 
-        lResult = mbedtls_asn1_get_tag( &pucIterator, &( pucIterator[ uxLen ] ), &uxLen, MBEDTLS_ASN1_OCTET_STRING );
-
-        if( lResult != 0 )
-        {
-            xResult = CKR_GENERAL_ERROR;
-        }
-        else
-        {
-            lResult = mbedtls_ecp_point_read_binary( &( pxMbedEcDsaCtx->grp ),
-                                                     &( pxMbedEcDsaCtx->Q ),
-                                                     pucIterator,
-                                                     uxLen );
+            xResult = pxFunctionList->C_GetAttributeValue( xSessionHandle,
+                                                           xPkHandle,
+                                                           pxAttrs,
+                                                           2 );
         }
 
-        if( lResult != 0 )
+        /* Parse EC Group */
+        if( xResult == CKR_OK )
         {
-            xResult = CKR_GENERAL_ERROR;
+            /*TODO: Parse the ECParameters object */
+            int lResult = mbedtls_ecp_group_load( &( pxMbedEcDsaCtx->grp ), MBEDTLS_ECP_DP_SECP256R1 );
+
+            if( lResult != 0 )
+            {
+                xResult = CKR_FUNCTION_FAILED;
+            }
         }
-    }
 
-    if( pxAttrs[ 0 ].pValue != NULL )
-    {
-        vPortFree( pxAttrs[ 0 ].pValue );
-    }
+        /* Parse ECPoint */
+        if( xResult == CKR_OK )
+        {
+            unsigned char * pucIterator = pxAttrs[ 1 ].pValue;
+            size_t uxLen = pxAttrs[ 1 ].ulValueLen;
+            int lResult = 0;
 
-    if( pxAttrs[ 1 ].pValue != NULL )
-    {
-        vPortFree( pxAttrs[ 1 ].pValue );
-    }
+            lResult = mbedtls_asn1_get_tag( &pucIterator, &( pucIterator[ uxLen ] ), &uxLen, MBEDTLS_ASN1_OCTET_STRING );
 
-    if( xResult == CKR_OK )
-    {
-        pxP11EcDsaCtx->xP11PkCtx.pxFunctionList = pxFunctionList;
-        pxP11EcDsaCtx->xP11PkCtx.xSessionHandle = xSessionHandle;
-        pxP11EcDsaCtx->xP11PkCtx.xPkHandle = xPkHandle;
+            if( lResult != 0 )
+            {
+                xResult = CKR_GENERAL_ERROR;
+            }
+            else
+            {
+                lResult = mbedtls_ecp_point_read_binary( &( pxMbedEcDsaCtx->grp ),
+                                                         &( pxMbedEcDsaCtx->Q ),
+                                                         pucIterator,
+                                                         uxLen );
+            }
+
+            if( lResult != 0 )
+            {
+                xResult = CKR_GENERAL_ERROR;
+            }
+        }
+        if( pxAttrs[ 0 ].pValue != NULL )
+        {
+        	vPortFree( pxAttrs[ 0 ].pValue );
+        }
+
+        if( pxAttrs[ 1 ].pValue != NULL )
+        {
+        	vPortFree( pxAttrs[ 1 ].pValue );
+        }
+        if( xResult == CKR_OK )
+        {
+            pxP11EcDsaCtx->xP11PkCtx.pxFunctionList = pxFunctionList;
+            pxP11EcDsaCtx->xP11PkCtx.xSessionHandle = xSessionHandle;
+            pxP11EcDsaCtx->xP11PkCtx.xPkHandle = xPkHandle;
+        }
     }
 
     return xResult;
@@ -649,7 +664,7 @@ static int prvEcdsaSigToASN1InPlace( unsigned char * pucSig,
 
 /*-----------------------------------------------------------*/
 
-static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
+static int p11_ecdsa_sign( mbedtls_pk_context * pk,
                            mbedtls_md_type_t xMdAlg,
                            const unsigned char * pucHash,
                            size_t xHashLen,
@@ -661,7 +676,7 @@ static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
 {
     CK_RV xResult = CKR_OK;
     int32_t lFinalResult = 0;
-    const P11EcDsaCtx_t * pxEcDsaCtx = NULL;
+    const P11EcDsaCtx_t * pxEcDsaCtx = ( P11EcDsaCtx_t * ) pk->pk_ctx;
     const P11PkCtx_t * pxP11Ctx = NULL;
     unsigned char pucHashCopy[ MBEDTLS_MD_MAX_SIZE ];
 
@@ -683,9 +698,8 @@ static int p11_ecdsa_sign( mbedtls_pk_context * pvCtx,
     configASSERT( pucHash != NULL );
     configASSERT( xHashLen > 0 );
 
-    if( pvCtx != NULL )
+    if( pxEcDsaCtx != NULL )
     {
-        pxEcDsaCtx = ( P11EcDsaCtx_t * ) pvCtx;
         pxP11Ctx = &( pxEcDsaCtx->xP11PkCtx );
     }
     else
@@ -861,7 +875,7 @@ static size_t p11_rsa_get_bitlen( mbedtls_pk_context * pxMbedtlsPkCtx )
 
 static int p11_rsa_can_do( mbedtls_pk_type_t xType )
 {
-    return( xType == MBEDTLS_PK_RSA );
+	return( ( xType == MBEDTLS_PK_RSA ) || ( xType == MBEDTLS_PK_RSASSA_PSS ) );
 }
 
 /*-----------------------------------------------------------*/
@@ -883,7 +897,7 @@ static int p11_rsa_verify( mbedtls_pk_context * pxMbedtlsPkCtx,
 
 /*-----------------------------------------------------------*/
 
-static int p11_rsa_sign( mbedtls_pk_context * pvCtx,
+static int p11_rsa_sign( mbedtls_pk_context * pk,
                          mbedtls_md_type_t xMdAlg,
                          const unsigned char * pucHash,
                          size_t xHashLen,
@@ -926,9 +940,9 @@ static int p11_rsa_sign( mbedtls_pk_context * pvCtx,
     {
         xResult = CKR_ARGUMENTS_BAD;
     }
-    else if( pvCtx != NULL )
+    else if( pk != NULL )
     {
-        pxP11RsaCtx = ( P11RsaCtx_t * ) pvCtx;
+        pxP11RsaCtx = ( P11RsaCtx_t * ) pk->pk_ctx;
         pxP11Ctx = &( pxP11RsaCtx->xP11PkCtx );
     }
     else
@@ -994,14 +1008,14 @@ static void * p11_rsa_ctx_alloc( void )
 
     if( pvCtx != NULL )
     {
-        P11RsaCtx_t * pxP11Rsa = ( P11RsaCtx_t * ) pvCtx;
+        P11RsaCtx_t * pxRsaCtx = ( P11RsaCtx_t * ) pvCtx;
 
         /* Initialize other fields */
-        pxP11Rsa->xP11PkCtx.pxFunctionList = NULL;
-        pxP11Rsa->xP11PkCtx.xSessionHandle = CK_INVALID_HANDLE;
-        pxP11Rsa->xP11PkCtx.xPkHandle = CK_INVALID_HANDLE;
+        pxRsaCtx->xP11PkCtx.pxFunctionList = NULL;
+        pxRsaCtx->xP11PkCtx.xSessionHandle = CK_INVALID_HANDLE;
+        pxRsaCtx->xP11PkCtx.xPkHandle = CK_INVALID_HANDLE;
 
-        mbedtls_rsa_init( &( pxP11Rsa->xMbedRsaCtx ) );
+        mbedtls_rsa_init( &( pxRsaCtx->xMbedRsaCtx ) );
     }
 
     return pvCtx;
@@ -1009,13 +1023,13 @@ static void * p11_rsa_ctx_alloc( void )
 
 /*-----------------------------------------------------------*/
 
-static CK_RV p11_rsa_ctx_init( void * pvCtx,
+static CK_RV p11_rsa_ctx_init( mbedtls_pk_context * pk,
                                CK_FUNCTION_LIST_PTR pxFunctionList,
                                CK_SESSION_HANDLE xSessionHandle,
                                CK_OBJECT_HANDLE xPkHandle )
 {
     CK_RV xResult = CKR_OK;
-    P11RsaCtx_t * pxP11RsaCtx = ( P11RsaCtx_t * ) pvCtx;
+    P11RsaCtx_t * pxP11RsaCtx = ( P11RsaCtx_t * ) pk;
     mbedtls_rsa_context * pxMbedRsaCtx = NULL;
 
     configASSERT( pxFunctionList != NULL );
