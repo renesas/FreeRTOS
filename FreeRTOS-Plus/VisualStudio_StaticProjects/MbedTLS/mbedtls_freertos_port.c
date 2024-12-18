@@ -324,7 +324,7 @@ void mbedtls_platform_free( void * ptr )
             ( void ) _close( file );
             return rslt;
         }
-    #else /* if defined( RNG_SOURCE_WINDOWS_CRYPT ) */
+    #elif defined( RNG_SOURCE_WINDOWS_CRYPT ) 
         #include <stdio.h>
         int mbedtls_hardware_poll( void * data,
                                    unsigned char * output,
@@ -358,6 +358,8 @@ void mbedtls_platform_free( void * ptr )
 
             return rslt;
         }
+    #else 
+     /*renesas*/
     #endif /* if defined( RNG_SOURCE_WINDOWS_CRYPT ) */
 #endif /* if defined( MBEDTLS_ENTROPY_HARDWARE_ALT ) */
 /*-----------------------------------------------------------*/
