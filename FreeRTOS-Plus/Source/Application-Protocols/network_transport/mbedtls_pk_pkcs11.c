@@ -762,8 +762,6 @@ static int p11_ecdsa_sign( mbedtls_pk_context * pk,
 
 /*-----------------------------------------------------------*/
 static size_t p11_ecdsa_get_bitlen(mbedtls_pk_context * pxMbedtlsPkCtx)
-//static size_t p11_ecdsa_get_bitlen( const int * pxMbedtlsPkCtx )
-//static size_t p11_ecdsa_get_bitlen( const mbedtls_pk_context * pxMbedtlsPkCtx )
 {
     configASSERT( mbedtls_ecdsa_info.get_bitlen );
 
