@@ -63,7 +63,7 @@
  *
  * @param[out] pTcpSocket The output parameter to return the created socket descriptor.
  * @param[in] pHostName Server hostname to connect to.
- * @param[in] pServerInfo Server port to connect to.
+ * @param[in] port Server port to connect to.
  * @param[in] receiveTimeoutMs Timeout (in milliseconds) for transport receive.
  * @param[in] sendTimeoutMs Timeout (in milliseconds) for transport send.
  *
