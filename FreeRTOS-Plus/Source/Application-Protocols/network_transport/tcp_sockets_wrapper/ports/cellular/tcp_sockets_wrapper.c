@@ -446,13 +446,13 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
                                              TickType_t receiveTimeout )
 {
     CellularError_t socketStatus = CELLULAR_SUCCESS;
-    BaseType_t retSetSockOpt = SOCKETS_ERROR_NONE;
+    BaseType_t retSetSockOpt = TCP_SOCKETS_ERRNO_NONE;
     uint32_t receiveTimeoutMs = 0;
     CellularSocketHandle_t cellularSocketHandle = NULL;
 
     if( pCellularSocketContext == NULL )
     {
-        retSetSockOpt = SOCKETS_EINVAL;
+        retSetSockOpt = TCP_SOCKETS_ERRNO_EINVAL;
     }
     else
     {
@@ -467,8 +467,8 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
         }
         else if( receiveTimeout >= portMAX_DELAY )
         {
-            IotLogWarn( "Receievetimeout %d longer than portMAX_DELAY, %d ms is used instead",
-                        receiveTimeout, UINT32_MAX_DELAY_MS );
+            LogWarn(( "Receievetimeout %d longer than portMAX_DELAY, %d ms is used instead",
+                        receiveTimeout, UINT32_MAX_DELAY_MS ));
             pCellularSocketContext->receiveTimeout = portMAX_DELAY;
             receiveTimeoutMs = UINT32_MAX_DELAY_MS;
         }
@@ -487,7 +487,7 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
 
         if( socketStatus != CELLULAR_SUCCESS )
         {
-            retSetSockOpt = SOCKETS_EINVAL;
+            retSetSockOpt = TCP_SOCKETS_ERRNO_EINVAL;
         }
     }
 
@@ -910,8 +910,8 @@ int32_t TCP_Sockets_Send( Socket_t xSocket,
         }
         else if( pCellularSocketContext->sendTimeout >= portMAX_DELAY )
         {
-            IotLogWarn( "Sendtimeout %d longer than portMAX_DELAY, %d ms is used instead",
-                        pCellularSocketContext->sendTimeout, UINT32_MAX_DELAY_MS );
+            LogWarn( ("Sendtimeout %d longer than portMAX_DELAY, %d ms is used instead",
+                        pCellularSocketContext->sendTimeout, UINT32_MAX_DELAY_MS ));
             sendTimeoutMs = UINT32_MAX_DELAY_MS;
         }
         else
@@ -947,7 +947,7 @@ int32_t TCP_Sockets_Send( Socket_t xSocket,
                     }
                     else
                     {
-                        retSendLength = ( BaseType_t ) SOCKETS_SOCKET_ERROR;
+                        retSendLength = ( BaseType_t ) TCP_SOCKETS_ERRNO_ERROR;
                     }
                 }
                 break;
