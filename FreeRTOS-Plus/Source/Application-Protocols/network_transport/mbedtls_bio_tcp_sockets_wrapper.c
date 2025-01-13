@@ -31,7 +31,7 @@
 
 /* MbedTLS includes. */
 #if !defined( MBEDTLS_CONFIG_FILE )
-    #include "mbedtls/config.h"
+    #include "mbedtls/mbedtls_config.h"
 #else
     #include MBEDTLS_CONFIG_FILE
 #endif
