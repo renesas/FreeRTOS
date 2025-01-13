@@ -869,10 +869,7 @@ static int p11_ecdsa_check_pair( mbedtls_pk_context * pvPub,
 
 /*-----------------------------------------------------------*/
 
-//static void p11_ecdsa_debug( /*const*/ mbedtls_pk_context const* pxMbedtlsPkCtx,
-  //                           mbedtls_pk_debug_item * pxItems )
 void p11_ecdsa_debug (mbedtls_pk_context *pxMbedtlsPkCtx, mbedtls_pk_debug_item *pxItems)
-//static void p11_ecdsa_debug( int pxMbedtlsPkCtx, int pxItems)
 {
     configASSERT( mbedtls_ecdsa_info.debug_func );
 
@@ -883,7 +880,6 @@ void p11_ecdsa_debug (mbedtls_pk_context *pxMbedtlsPkCtx, mbedtls_pk_debug_item 
 
 static size_t p11_rsa_get_bitlen( mbedtls_pk_context * pxMbedtlsPkCtx )
 {
-    mbedtls_rsa_context * pxRsaCtx = ( mbedtls_rsa_context * ) pxMbedtlsPkCtx->pk_ctx;
 
     configASSERT( mbedtls_rsa_info.get_bitlen );
 
