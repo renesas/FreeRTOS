@@ -218,9 +218,9 @@ static int privateKeySigningCallback( void * pvContext,
                                       size_t xHashLen,
                                       unsigned char * pucSig,
                                       size_t * pxSigLen,
-                                      int ( *piRng )( void *,
-                                                          unsigned char *,
-                                                          size_t ),
+                                      int ( * piRng )( void *,
+                                                       unsigned char *,
+                                                       size_t ),
                                       void * pvRng );
 
 
@@ -553,7 +553,7 @@ static int generateRandomBytes( void * pvCtx,
         LogError( ( "Failed to generate random bytes from the PKCS #11 module." ) );
     }
 
-    return (int) xResult;
+    return ( int ) xResult;
 }
 
 /*-----------------------------------------------------------*/
@@ -566,9 +566,9 @@ static CK_RV readCertificateIntoContext( SSLContext_t * pSslContext,
     CK_RV xResult = CKR_OK;
     CK_ATTRIBUTE xTemplate = { 0 };
     CK_OBJECT_HANDLE xCertObj = 0;
-    size_t labelLength = strlen(pcLabelName);
+    size_t labelLength = strlen( pcLabelName );
 
-    if (labelLength > pkcs11configMAX_LABEL_LENGTH)
+    if( labelLength > pkcs11configMAX_LABEL_LENGTH )
     {
         labelLength = pkcs11configMAX_LABEL_LENGTH;
     }
@@ -620,9 +620,9 @@ static CK_RV readCertificateIntoContext( SSLContext_t * pSslContext,
     /* Decode the certificate. */
     if( CKR_OK == xResult )
     {
-        xResult = (CK_RV)mbedtls_x509_crt_parse( pxCertificateContext,
-                                          ( const unsigned char * ) xTemplate.pValue,
-                                          xTemplate.ulValueLen );
+        xResult = ( CK_RV ) mbedtls_x509_crt_parse( pxCertificateContext,
+                                                    ( const unsigned char * ) xTemplate.pValue,
+                                                    xTemplate.ulValueLen );
     }
 
     /* Free memory. */
@@ -654,8 +654,8 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
     if( CKR_OK == xResult )
     {
         xResult = pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
-                                                                          NULL,
-                                                                          &xCount );
+                                                           NULL,
+                                                           &xCount );
     }
 
     /* Allocate memory to store the token slots. */
@@ -672,33 +672,32 @@ static CK_RV initializeClientKeys( SSLContext_t * pxCtx,
     /* Get all of the available private key slot identities. */
     if( CKR_OK == xResult )
     {
-        xResult =  pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
-                                                                          pxSlotIds,
-                                                                          &xCount );
+        xResult = pxCtx->pxP11FunctionList->C_GetSlotList( CK_TRUE,
+                                                           pxSlotIds,
+                                                           &xCount );
     }
 
     /* Put the module in authenticated mode. */
     if( CKR_OK == xResult )
     {
         xResult = pxCtx->pxP11FunctionList->C_Login( pxCtx->xP11Session,
-                                                      CKU_USER,
-                                                      ( CK_UTF8CHAR_PTR ) configPKCS11_DEFAULT_USER_PIN,
-                                                      sizeof( configPKCS11_DEFAULT_USER_PIN ) - 1 );
+                                                     CKU_USER,
+                                                     ( CK_UTF8CHAR_PTR ) configPKCS11_DEFAULT_USER_PIN,
+                                                     sizeof( configPKCS11_DEFAULT_USER_PIN ) - 1 );
     }
 
     if( CKR_OK == xResult )
     {
-        size_t labelLength = strlen(pcLabelName);
+        size_t labelLength = strlen( pcLabelName );
 
-        if (labelLength > pkcs11configMAX_LABEL_LENGTH)
+        if( labelLength > pkcs11configMAX_LABEL_LENGTH )
         {
             labelLength = pkcs11configMAX_LABEL_LENGTH;
         }
 
-
         /* Get the handle of the device private key. */
         xResult = xFindObjectWithLabelAndClass( pxCtx->xP11Session,
-                                                (char *)pcLabelName,
+                                                ( char * ) pcLabelName,
                                                 labelLength,
                                                 CKO_PRIVATE_KEY,
                                                 &pxCtx->xP11PrivateKey );

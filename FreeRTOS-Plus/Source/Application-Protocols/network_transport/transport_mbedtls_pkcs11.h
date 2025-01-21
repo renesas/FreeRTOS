@@ -65,16 +65,16 @@
 
 /* Undefine the macro for Keil Compiler to avoid conflict: */
 /* __PASTE macro redefinition [-Wmacro-redefinition] */
-#if defined(__ARMCC_VERSION)
- #pragma GCC diagnostic push
- #pragma GCC diagnostic ignored "-Wmacro-redefined"
+#if defined( __ARMCC_VERSION )
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wmacro-redefined"
 #endif
 
 /* PKCS #11 includes. */
 #include "core_pkcs11.h"
 
-#if defined(__ARMCC_VERSION)
- #pragma GCC diagnostic pop
+#if defined( __ARMCC_VERSION )
+    #pragma GCC diagnostic pop
 #endif
 
 /**

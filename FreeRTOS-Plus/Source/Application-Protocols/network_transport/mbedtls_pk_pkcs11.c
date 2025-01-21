@@ -153,7 +153,7 @@ static int p11_ecdsa_sign( mbedtls_pk_context * pk,
  * @param pvCtx Void pointer to the relevant P11EcDsaCtx_t.
  * @return size_t Bit length of the key.
  */
-static size_t p11_ecdsa_get_bitlen(  mbedtls_pk_context * pxMbedtlsPkCtx );
+static size_t p11_ecdsa_get_bitlen( mbedtls_pk_context * pxMbedtlsPkCtx );
 
 /**
  * @brief Returns true if the pk context can perform the given pk operation.
@@ -190,7 +190,8 @@ static int p11_ecdsa_check_pair( mbedtls_pk_context * pvPub,
                                  int ( * lFRng )( void *, unsigned char *, size_t ),
                                  void * pvPRng );
 
-static void p11_ecdsa_debug (mbedtls_pk_context *pxMbedtlsPkCtx, mbedtls_pk_debug_item *pxItems);
+static void p11_ecdsa_debug( mbedtls_pk_context * pxMbedtlsPkCtx,
+                             mbedtls_pk_debug_item * pxItems );
 
 static int prvEcdsaSigToASN1InPlace( unsigned char * pucSig,
                                      size_t xSigBufferSize,
@@ -757,7 +758,7 @@ static int p11_ecdsa_sign( mbedtls_pk_context * pk,
 }
 
 /*-----------------------------------------------------------*/
-static size_t p11_ecdsa_get_bitlen(mbedtls_pk_context * pxMbedtlsPkCtx)
+static size_t p11_ecdsa_get_bitlen( mbedtls_pk_context * pxMbedtlsPkCtx )
 {
     configASSERT( mbedtls_ecdsa_info.get_bitlen );
 
@@ -865,7 +866,8 @@ static int p11_ecdsa_check_pair( mbedtls_pk_context * pvPub,
 
 /*-----------------------------------------------------------*/
 
-void p11_ecdsa_debug (mbedtls_pk_context *pxMbedtlsPkCtx, mbedtls_pk_debug_item *pxItems)
+void p11_ecdsa_debug( mbedtls_pk_context * pxMbedtlsPkCtx,
+                      mbedtls_pk_debug_item * pxItems )
 {
     configASSERT( mbedtls_ecdsa_info.debug_func );
 
@@ -876,7 +878,6 @@ void p11_ecdsa_debug (mbedtls_pk_context *pxMbedtlsPkCtx, mbedtls_pk_debug_item 
 
 static size_t p11_rsa_get_bitlen( mbedtls_pk_context * pxMbedtlsPkCtx )
 {
-
     configASSERT( mbedtls_rsa_info.get_bitlen );
 
     return mbedtls_rsa_info.get_bitlen( pxMbedtlsPkCtx );

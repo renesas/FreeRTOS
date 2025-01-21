@@ -457,7 +457,9 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
     else
     {
         if( receiveTimeout >= portMAX_DELAY )
-        cellularSocketHandle = pCellularSocketContext->cellularSocketHandle;
+        {
+            cellularSocketHandle = pCellularSocketContext->cellularSocketHandle;
+        }
 
         if( receiveTimeout >= UINT32_MAX_MS_TICKS )
         {
@@ -467,8 +469,8 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
         }
         else if( receiveTimeout >= portMAX_DELAY )
         {
-            LogWarn(( "Receievetimeout %d longer than portMAX_DELAY, %d ms is used instead",
-                        receiveTimeout, UINT32_MAX_DELAY_MS ));
+            LogWarn( ( "Receievetimeout %d longer than portMAX_DELAY, %d ms is used instead",
+                       receiveTimeout, UINT32_MAX_DELAY_MS ) );
             pCellularSocketContext->receiveTimeout = portMAX_DELAY;
             receiveTimeoutMs = UINT32_MAX_DELAY_MS;
         }
@@ -828,7 +830,7 @@ void TCP_Sockets_Disconnect( Socket_t xSocket )
             pCellularSocketContext->socketEventGroupHandle = NULL;
         }
 
-        (void) retClose;
+        ( void ) retClose;
         vPortFree( pCellularSocketContext );
     }
 
@@ -903,15 +905,15 @@ int32_t TCP_Sockets_Send( Socket_t xSocket,
         cellularSocketHandle = pCellularSocketContext->cellularSocketHandle;
 
         /* Convert ticks to ms delay. */
-        if( pCellularSocketContext->sendTimeout >= UINT32_MAX_MS_TICKS ) 
+        if( pCellularSocketContext->sendTimeout >= UINT32_MAX_MS_TICKS )
         {
             /* Check if the ticks cause overflow. */
             sendTimeoutMs = UINT32_MAX_DELAY_MS;
         }
         else if( pCellularSocketContext->sendTimeout >= portMAX_DELAY )
         {
-            LogWarn( ("Sendtimeout %d longer than portMAX_DELAY, %d ms is used instead",
-                        pCellularSocketContext->sendTimeout, UINT32_MAX_DELAY_MS ));
+            LogWarn( ( "Sendtimeout %d longer than portMAX_DELAY, %d ms is used instead",
+                       pCellularSocketContext->sendTimeout, UINT32_MAX_DELAY_MS ) );
             sendTimeoutMs = UINT32_MAX_DELAY_MS;
         }
         else
@@ -950,6 +952,7 @@ int32_t TCP_Sockets_Send( Socket_t xSocket,
                         retSendLength = ( BaseType_t ) TCP_SOCKETS_ERRNO_ERROR;
                     }
                 }
+
                 break;
             }
         }
