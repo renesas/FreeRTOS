@@ -1,10 +1,6 @@
 [submodule "FreeRTOS/Source"]
 	path = FreeRTOS/Source
-<<<<<<< HEAD
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Kernel.git
-=======
-	url = http://pbgitap01.rea.renesas.com/mirrorsggg/github/FreeRTOS-Kernel.git
->>>>>>> parent of 2ab807527 (Revert "Update to use mirrors")
 [submodule "FreeRTOS/Test/CMock/CMock"]
 	path = FreeRTOS/Test/CMock/CMock
 	url = http://pbgitap01.rea.renesas.com:mirrors/github/CMock
