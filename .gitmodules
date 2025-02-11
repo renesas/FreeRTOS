@@ -18,7 +18,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreJSON
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
-	url = http://pbgitap01.rea.renesas.com:mirrors/github/CMock
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/CMock
 [submodule "FreeRTOS-Plus/ThirdParty/mbedtls"]
 	path = FreeRTOS-Plus/ThirdParty/mbedtls
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/mbedtls.git
