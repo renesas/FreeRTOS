@@ -3,7 +3,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Kernel.git
 [submodule "FreeRTOS/Test/CMock/CMock"]
 	path = FreeRTOS/Test/CMock/CMock
-  url = http://pbgitap01.rea.renesas.com/mirrors/github/CMock
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/CMock
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Plus-TCP
@@ -30,7 +30,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/jobs-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-defender"]
 	path = FreeRTOS-Plus/Source/AWS/device-defender
-	url =http://pbgitap01.rea.renesas.com/mirrors/github/device-defender-for-aws-iot-embedded-sdk.git
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-defender-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreHTTP
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreHTTP
