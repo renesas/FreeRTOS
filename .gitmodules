@@ -42,7 +42,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/wolfssl.git
 [submodule "FreeRTOS-Plus/ThirdParty/libslirp"]
 	path = FreeRTOS-Plus/ThirdParty/libslirp
-	url = https://gitlab.com/qemu-project/libslirp.git
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/libslirp.git
 [submodule "FreeRTOS-Plus/ThirdParty/glib"]
 	path = FreeRTOS-Plus/ThirdParty/glib
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/glib.git
