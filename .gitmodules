@@ -3,7 +3,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Kernel.git
 [submodule "FreeRTOS/Test/CMock/CMock"]
 	path = FreeRTOS/Test/CMock/CMock
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/CMock
+	url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Plus-TCP
@@ -18,7 +18,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreJSON
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/CMock
+		url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/ThirdParty/mbedtls"]
 	path = FreeRTOS-Plus/ThirdParty/mbedtls
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/mbedtls.git
