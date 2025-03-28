@@ -6,16 +6,16 @@
 	url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Plus-TCP
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Plus-TCP.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-shadow"]
 	path = FreeRTOS-Plus/Source/AWS/device-shadow
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-shadow-for-aws-iot-embedded-sdk
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-shadow-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreMQTT"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreMQTT
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreMQTT
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreMQTT.git
 [submodule "FreeRTOS-Plus/Source/coreJSON"]
 	path = FreeRTOS-Plus/Source/coreJSON
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreJSON
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreJSON.git
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
 		url = https://github.com/ThrowTheSwitch/CMock.git
@@ -33,7 +33,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-defender-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreHTTP
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreHTTP
+  url = http://pbgitap01.rea.renesas.com/mirrors/github/coreHTTP.git
 [submodule "FreeRTOS-Plus/Source/Utilities/backoff_algorithm"]
 	path = FreeRTOS-Plus/Source/Utilities/backoff_algorithm
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/backoffAlgorithm.git
@@ -57,7 +57,7 @@
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreSNTP.git
 [submodule "FreeRTOS/Demo/ThirdParty/Community-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Community-Supported-Demos
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Community-Supported-Demos
+	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Community-Supported-Demos.git
 [submodule "FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos
 	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Partner-Supported-Demos.git
