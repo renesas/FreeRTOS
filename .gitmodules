@@ -1,87 +1,87 @@
 [submodule "FreeRTOS/Source"]
 	path = FreeRTOS/Source
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Kernel.git
+	url = ./FreeRTOS-Kernel.git
 [submodule "FreeRTOS/Test/CMock/CMock"]
 	path = FreeRTOS/Test/CMock/CMock
 	url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Plus-TCP.git
+	url = ./FreeRTOS-Plus-TCP.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-shadow"]
 	path = FreeRTOS-Plus/Source/AWS/device-shadow
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-shadow-for-aws-iot-embedded-sdk.git
+	url = ./device-shadow-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreMQTT"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreMQTT
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreMQTT.git
+	url = ./coreMQTT.git
 [submodule "FreeRTOS-Plus/Source/coreJSON"]
 	path = FreeRTOS-Plus/Source/coreJSON
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreJSON.git
+	url = ./coreJSON.git
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
 		url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/ThirdParty/mbedtls"]
 	path = FreeRTOS-Plus/ThirdParty/mbedtls
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/mbedtls.git
+	url = ./mbedtls.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/corePKCS11"]
 	path = FreeRTOS-Plus/Source/corePKCS11
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/corePKCS11.git
+	url = ./corePKCS11.git
 [submodule "FreeRTOS-Plus/Source/AWS/jobs"]
 	path = FreeRTOS-Plus/Source/AWS/jobs
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/jobs-for-aws-iot-embedded-sdk.git
+	url = ./jobs-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-defender"]
 	path = FreeRTOS-Plus/Source/AWS/device-defender
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/device-defender-for-aws-iot-embedded-sdk.git
+	url = ./device-defender-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreHTTP
-  url = http://pbgitap01.rea.renesas.com/mirrors/github/coreHTTP.git
+  url = ./coreHTTP.git
 [submodule "FreeRTOS-Plus/Source/Utilities/backoff_algorithm"]
 	path = FreeRTOS-Plus/Source/Utilities/backoff_algorithm
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/backoffAlgorithm.git
+	url = ./backoffAlgorithm.git
 [submodule "FreeRTOS-Plus/ThirdParty/wolfSSL"]
 	path = FreeRTOS-Plus/ThirdParty/wolfSSL
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/wolfssl.git
+	url = ./wolfssl.git
 [submodule "FreeRTOS-Plus/ThirdParty/libslirp"]
 	path = FreeRTOS-Plus/ThirdParty/libslirp
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/libslirp.git
+	url = ./libslirp.git
 [submodule "FreeRTOS-Plus/ThirdParty/glib"]
 	path = FreeRTOS-Plus/ThirdParty/glib
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/glib.git
+	url = ./glib.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreMQTT-Agent"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreMQTT-Agent
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreMQTT-Agent.git
+	url = ./coreMQTT-Agent.git
 [submodule "FreeRTOS-Plus/Source/AWS/ota"]
 	path = FreeRTOS-Plus/Source/AWS/ota
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/ota-for-aws-iot-embedded-sdk.git
+	url = ./ota-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreSNTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreSNTP
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/coreSNTP.git
+	url = ./coreSNTP.git
 [submodule "FreeRTOS/Demo/ThirdParty/Community-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Community-Supported-Demos
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Community-Supported-Demos.git
+	url = ./FreeRTOS-Community-Supported-Demos.git
 [submodule "FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Partner-Supported-Demos.git
+	url = ./FreeRTOS-Partner-Supported-Demos.git
 [submodule "FreeRTOS-Plus/Source/AWS/sigv4"]
 	path = FreeRTOS-Plus/Source/AWS/sigv4
-	url =http://pbgitap01.rea.renesas.com/mirrors/github/SigV4-for-AWS-IoT-embedded-sdk.git
+	url =./SigV4-for-AWS-IoT-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/FreeRTOS-Cellular-Interface.git
+	url = ./FreeRTOS-Cellular-Interface.git
 [submodule "FreeRTOS-Plus/ThirdParty/tinycbor"]
 	path = FreeRTOS-Plus/ThirdParty/tinycbor
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/tinycbor.git
+	url = ./tinycbor.git
 [submodule "FreeRTOS-Plus/Source/AWS/fleet-provisioning"]
 	path = FreeRTOS-Plus/Source/AWS/fleet-provisioning
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/Fleet-Provisioning-for-AWS-IoT-embedded-sdk.git
+	url = ./Fleet-Provisioning-for-AWS-IoT-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/bg96"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/bg96
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/Lab-FreeRTOS-Cellular-Interface-Reference-Quectel-BG96.git
+	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-Quectel-BG96.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/hl7802"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/hl7802
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/Lab-FreeRTOS-Cellular-Interface-Reference-Sierra-Wireless-HL7802.git
+	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-Sierra-Wireless-HL7802.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/sara-r4"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/sara-r4
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/Lab-FreeRTOS-Cellular-Interface-Reference-ublox-SARA-R4.git
+	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-ublox-SARA-R4.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace
-	url = http://pbgitap01.rea.renesas.com/mirrors/github/TraceRecorderSource.git
+	url = ./TraceRecorderSource.git
