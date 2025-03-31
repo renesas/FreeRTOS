@@ -1,87 +1,87 @@
 [submodule "FreeRTOS/Source"]
 	path = FreeRTOS/Source
-	url = ./FreeRTOS-Kernel.git
+	url = ../FreeRTOS-Kernel.git
 [submodule "FreeRTOS/Test/CMock/CMock"]
 	path = FreeRTOS/Test/CMock/CMock
 	url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-TCP
-	url = ./FreeRTOS-Plus-TCP.git
+	url = ../FreeRTOS-Plus-TCP.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-shadow"]
 	path = FreeRTOS-Plus/Source/AWS/device-shadow
-	url = ./device-shadow-for-aws-iot-embedded-sdk.git
+	url = ../device-shadow-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreMQTT"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreMQTT
-	url = ./coreMQTT.git
+	url = ../coreMQTT.git
 [submodule "FreeRTOS-Plus/Source/coreJSON"]
 	path = FreeRTOS-Plus/Source/coreJSON
-	url = ./coreJSON.git
+	url = ../coreJSON.git
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
 		url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/ThirdParty/mbedtls"]
 	path = FreeRTOS-Plus/ThirdParty/mbedtls
-	url = ./mbedtls.git
+	url = ../mbedtls.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/corePKCS11"]
 	path = FreeRTOS-Plus/Source/corePKCS11
-	url = ./corePKCS11.git
+	url = ../corePKCS11.git
 [submodule "FreeRTOS-Plus/Source/AWS/jobs"]
 	path = FreeRTOS-Plus/Source/AWS/jobs
-	url = ./jobs-for-aws-iot-embedded-sdk.git
+	url = ../jobs-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/AWS/device-defender"]
 	path = FreeRTOS-Plus/Source/AWS/device-defender
-	url = ./device-defender-for-aws-iot-embedded-sdk.git
+	url = ../device-defender-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreHTTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreHTTP
-  url = ./coreHTTP.git
+  url = ../coreHTTP.git
 [submodule "FreeRTOS-Plus/Source/Utilities/backoff_algorithm"]
 	path = FreeRTOS-Plus/Source/Utilities/backoff_algorithm
-	url = ./backoffAlgorithm.git
+	url = ../backoffAlgorithm.git
 [submodule "FreeRTOS-Plus/ThirdParty/wolfSSL"]
 	path = FreeRTOS-Plus/ThirdParty/wolfSSL
-	url = ./wolfssl.git
+	url = ../wolfssl.git
 [submodule "FreeRTOS-Plus/ThirdParty/libslirp"]
 	path = FreeRTOS-Plus/ThirdParty/libslirp
-	url = ./libslirp.git
+	url = ../libslirp.git
 [submodule "FreeRTOS-Plus/ThirdParty/glib"]
 	path = FreeRTOS-Plus/ThirdParty/glib
-	url = ./glib.git
+	url = ../glib.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreMQTT-Agent"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreMQTT-Agent
-	url = ./coreMQTT-Agent.git
+	url = ../coreMQTT-Agent.git
 [submodule "FreeRTOS-Plus/Source/AWS/ota"]
 	path = FreeRTOS-Plus/Source/AWS/ota
-	url = ./ota-for-aws-iot-embedded-sdk.git
+	url = ../ota-for-aws-iot-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/Application-Protocols/coreSNTP"]
 	path = FreeRTOS-Plus/Source/Application-Protocols/coreSNTP
-	url = ./coreSNTP.git
+	url = ../coreSNTP.git
 [submodule "FreeRTOS/Demo/ThirdParty/Community-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Community-Supported-Demos
-	url = ./FreeRTOS-Community-Supported-Demos.git
+	url = ../FreeRTOS-Community-Supported-Demos.git
 [submodule "FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos"]
 	path = FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos
-	url = ./FreeRTOS-Partner-Supported-Demos.git
+	url = ../FreeRTOS-Partner-Supported-Demos.git
 [submodule "FreeRTOS-Plus/Source/AWS/sigv4"]
 	path = FreeRTOS-Plus/Source/AWS/sigv4
 	url =./SigV4-for-AWS-IoT-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface
-	url = ./FreeRTOS-Cellular-Interface.git
+	url = ../FreeRTOS-Cellular-Interface.git
 [submodule "FreeRTOS-Plus/ThirdParty/tinycbor"]
 	path = FreeRTOS-Plus/ThirdParty/tinycbor
-	url = ./tinycbor.git
+	url = ../tinycbor.git
 [submodule "FreeRTOS-Plus/Source/AWS/fleet-provisioning"]
 	path = FreeRTOS-Plus/Source/AWS/fleet-provisioning
-	url = ./Fleet-Provisioning-for-AWS-IoT-embedded-sdk.git
+	url = ../Fleet-Provisioning-for-AWS-IoT-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/bg96"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/bg96
-	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-Quectel-BG96.git
+	url = ../Lab-FreeRTOS-Cellular-Interface-Reference-Quectel-BG96.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/hl7802"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/hl7802
-	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-Sierra-Wireless-HL7802.git
+	url = ../Lab-FreeRTOS-Cellular-Interface-Reference-Sierra-Wireless-HL7802.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/sara-r4"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Modules/sara-r4
-	url = ./Lab-FreeRTOS-Cellular-Interface-Reference-ublox-SARA-R4.git
+	url = ../Lab-FreeRTOS-Cellular-Interface-Reference-ublox-SARA-R4.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace
-	url = ./TraceRecorderSource.git
+	url = ../TraceRecorderSource.git
