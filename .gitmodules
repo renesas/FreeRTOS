@@ -18,7 +18,7 @@
 	url = ../coreJSON.git
 [submodule "FreeRTOS-Plus/Test/CMock"]
 	path = FreeRTOS-Plus/Test/CMock
-		url = https://github.com/ThrowTheSwitch/CMock.git
+  url = https://github.com/ThrowTheSwitch/CMock.git
 [submodule "FreeRTOS-Plus/ThirdParty/mbedtls"]
 	path = FreeRTOS-Plus/ThirdParty/mbedtls
 	url = ../mbedtls.git
@@ -63,7 +63,7 @@
 	url = ../FreeRTOS-Partner-Supported-Demos.git
 [submodule "FreeRTOS-Plus/Source/AWS/sigv4"]
 	path = FreeRTOS-Plus/Source/AWS/sigv4
-	url =./SigV4-for-AWS-IoT-embedded-sdk.git
+	url = ../SigV4-for-AWS-IoT-embedded-sdk.git
 [submodule "FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface"]
 	path = FreeRTOS-Plus/Source/FreeRTOS-Cellular-Interface
 	url = ../FreeRTOS-Cellular-Interface.git
