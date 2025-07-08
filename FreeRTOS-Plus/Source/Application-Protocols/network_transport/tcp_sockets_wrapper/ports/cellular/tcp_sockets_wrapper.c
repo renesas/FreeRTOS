@@ -456,10 +456,7 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
     }
     else
     {
-        if( receiveTimeout >= portMAX_DELAY )
-        {
-            cellularSocketHandle = pCellularSocketContext->cellularSocketHandle;
-        }
+        cellularSocketHandle = pCellularSocketContext->cellularSocketHandle;
 
         if( receiveTimeout >= UINT32_MAX_MS_TICKS )
         {
